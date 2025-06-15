@@ -42,6 +42,10 @@ public class Users extends BaseEntity {
     @TableField("full_name")
     private String fullName;
 
+    @Schema(description = "用户头像的URL链接")
+    @TableField("avatar")
+    private String avatar;
+
     @Schema(description = "用户角色: student, teacher, or admin")
     @TableField("role")
     private String role;

@@ -21,4 +21,7 @@ public class RegisterRequest {
 
     @Schema(description = "学号或教师编号", example = "20230001")
     private String userCode;
+
+    @Schema(description = "用户头像的URL链接", example = "https://example.com/avatar.png")
+    private String avatar;
 } 

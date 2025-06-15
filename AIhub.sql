@@ -32,6 +32,7 @@ CREATE TABLE `users` (
   `user_code` VARCHAR(50) NULL COMMENT '学号或教师编号, 具有唯一性',
   `password_hash` VARCHAR(255) NOT NULL COMMENT '加密后的密码哈希值',
   `full_name` VARCHAR(100) NULL COMMENT '用户真实姓名',
+  `avatar` VARCHAR(255) NULL COMMENT '用户头像的URL链接',
   `role` ENUM('student', 'teacher', 'admin') NOT NULL COMMENT '用户角色: student, teacher, or admin',
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户账户创建时间',
   `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '用户信息最后更新时间',
