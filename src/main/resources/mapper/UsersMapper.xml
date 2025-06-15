@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.aihub.mapper.UsersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.aihub.entity.Users">
+        <result column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="user_code" property="userCode" />
+        <result column="password_hash" property="passwordHash" />
+        <result column="full_name" property="fullName" />
+        <result column="role" property="role" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        username, email, user_code, password_hash, full_name, role, created_at, updated_at
+    </sql>
+
+</mapper>
