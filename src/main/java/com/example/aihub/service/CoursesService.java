@@ -14,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CoursesService extends IService<Courses> {
     Courses createCourse(CreateCourseRequest request);
+    void parseAndSaveChapters(Integer courseId);
 }

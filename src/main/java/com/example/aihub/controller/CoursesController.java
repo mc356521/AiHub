@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,18 @@ public class CoursesController {
             return Result.failed(e.getMessage());
         } catch (Exception e) {
             return Result.failed("创建课程时发生未知错误");
+        }
+    }
+
+    @PreAuthorize("hasAnyAuthority('teacher', 'admin')")
+    @Operation(summary = "解析课程内容", description = "解析指定课程的Markdown文件，并将其结构化的章节信息存入数据库。")
+    @PostMapping("/{courseId}/parse")
+    public Result<?> parseCourse(@PathVariable Integer courseId) {
+        try {
+            coursesService.parseAndSaveChapters(courseId);
+            return Result.success(null, "课程解析成功");
+        } catch (Exception e) {
+            return Result.failed("课程解析失败: " + e.getMessage());
         }
     }
 } 

@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2025-06-16
  */
 public interface ChaptersService extends IService<Chapters> {
-
+    void deleteByCourseId(Integer courseId);
+    
+    void physicalDeleteByCourseId(Integer courseId);
 }

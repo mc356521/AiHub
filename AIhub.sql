@@ -91,22 +91,25 @@ CREATE TABLE `courses` (
 CREATE TABLE `chapters` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `course_id` INT NOT NULL COMMENT '课程ID',
+  `parent_id` INT NULL COMMENT '父章节ID, 引用本表的id字段',
   `chapter_key` VARCHAR(100) NOT NULL COMMENT '章节标识（如: 1, 1.1, 1.2.1）',
-  `parent_key` VARCHAR(100) NULL COMMENT '父章节标识',
   `level` INT NOT NULL COMMENT '层级深度 1,2,3...',
   `title` VARCHAR(255) NOT NULL COMMENT '章节标题',
   `content` MEDIUMTEXT NULL COMMENT '章节内容',
   `sort_order` INT NOT NULL COMMENT '排序序号',
   `line_start` INT NULL COMMENT '起始行号',
   `line_end` INT NULL COMMENT '结束行号',
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` TINYINT(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_course_chapter` (`course_id`, `chapter_key`),
-  INDEX `idx_parent` (`parent_key`),
+  INDEX `idx_parent_id` (`parent_id`),
   INDEX `idx_level_sort` (`course_id`, `level`, `sort_order`),
   CONSTRAINT `fk_chapters_course`
-    FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_chapters_parent`
+    FOREIGN KEY (`parent_id`) REFERENCES `chapters` (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB COMMENT = '章节解析缓存，用于快速查询和导航';
 
 
@@ -322,8 +325,8 @@ CREATE TABLE `chapter_comments` (
   `user_id` INT NOT NULL,
   `content` TEXT NOT NULL COMMENT '评论内容',
   `parent_id` INT NULL COMMENT '父评论ID',
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` TINYINT(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `idx_chapter` (`course_id`, `chapter_key`),
@@ -368,11 +371,11 @@ CREATE TABLE `sync_logs` (
   `status` ENUM('success', 'failed') NOT NULL,
   `message` TEXT NULL COMMENT '操作信息或错误信息',
   `duration_ms` INT DEFAULT 0 COMMENT '处理耗时',
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idx_course` (`course_id`),
   INDEX `idx_status` (`status`),
-  INDEX `idx_created` (`created_at`),
+  INDEX `idx_created` (`create_time`),
   CONSTRAINT `fk_logs_course`
     FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB COMMENT = '文件同步操作日志';
@@ -428,7 +431,7 @@ SELECT
     c.id,
     c.course_id,
     c.chapter_key,
-    c.parent_key,
+    c.parent_id,
     c.level,
     c.title,
     c.sort_order,

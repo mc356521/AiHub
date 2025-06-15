@@ -2,6 +2,7 @@ package com.example.aihub.mapper;
 
 import com.example.aihub.entity.Chapters;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -14,5 +15,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ChaptersMapper extends BaseMapper<Chapters> {
+
+    @Delete("DELETE FROM chapters WHERE course_id = #{courseId}")
+    void physicalDeleteByCourseId(Integer courseId);
 
 }

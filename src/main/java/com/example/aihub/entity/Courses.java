@@ -50,6 +50,10 @@ public class Courses extends BaseEntity {
     @TableField("parse_status")
     private String parseStatus;
 
+    @Schema(description = "解析错误信息")
+    @TableField("parse_error")
+    private String parseError;
+
     @Schema(description = "最后解析时间")
     @TableField("parsed_at")
     private LocalDateTime parsedAt;

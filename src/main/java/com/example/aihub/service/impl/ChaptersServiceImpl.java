@@ -3,6 +3,7 @@ package com.example.aihub.service.impl;
 import com.example.aihub.entity.Chapters;
 import com.example.aihub.mapper.ChaptersMapper;
 import com.example.aihub.service.ChaptersService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChaptersServiceImpl extends ServiceImpl<ChaptersMapper, Chapters> implements ChaptersService {
 
+    @Override
+    public void deleteByCourseId(Integer courseId) {
+        this.remove(new QueryWrapper<Chapters>().eq("course_id", courseId));
+    }
+
+    @Override
+    public void physicalDeleteByCourseId(Integer courseId) {
+        baseMapper.physicalDeleteByCourseId(courseId);
+    }
 }

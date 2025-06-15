@@ -25,13 +25,13 @@ public class Chapters extends BaseEntity {
     @TableField("course_id")
     private Integer courseId;
 
+    @Schema(description = "父章节ID, 引用本表的id字段")
+    @TableField("parent_id")
+    private Integer parentId;
+
     @Schema(description = "章节标识（如: 1, 1.1, 1.2.1）")
     @TableField("chapter_key")
     private String chapterKey;
-
-    @Schema(description = "父章节标识")
-    @TableField("parent_key")
-    private String parentKey;
 
     @Schema(description = "层级深度 1,2,3...")
     @TableField("level")
