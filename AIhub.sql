@@ -1,11 +1,13 @@
 -- -----------------------------------------------------
 -- AI教学实训智能体 - 数据库表结构
 -- -----------------------------------------------------
--- 版本: 1.1
--- 更新: 增加了班级口令、考核类型、项目提交与评分详情字段
+-- 版本: 2.2 (增加练习提交记录表)
 -- -----------------------------------------------------
 
--- 删除已存在的表，以便于重新创建
+-- 删除已存在的视图和表，以便于重新创建
+DROP VIEW IF EXISTS `v_chapter_tree`;
+DROP VIEW IF EXISTS `v_learning_stats`;
+DROP TABLE IF EXISTS `exercise_submissions`;
 DROP TABLE IF EXISTS `answers`;
 DROP TABLE IF EXISTS `submissions`;
 DROP TABLE IF EXISTS `assessment_questions`;
@@ -15,6 +17,14 @@ DROP TABLE IF EXISTS `resources`;
 DROP TABLE IF EXISTS `class_members`;
 DROP TABLE IF EXISTS `classes`;
 DROP TABLE IF EXISTS `enrollments`;
+DROP TABLE IF EXISTS `learning_progress`;
+DROP TABLE IF EXISTS `learning_records`;
+DROP TABLE IF EXISTS `chapter_comments`;
+DROP TABLE IF EXISTS `chapter_exercises`;
+DROP TABLE IF EXISTS `exercises`;
+DROP TABLE IF EXISTS `sync_logs`;
+DROP TABLE IF EXISTS `chapters`;
+DROP TABLE IF EXISTS `course_chapters`;
 DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `chat_messages`;
 DROP TABLE IF EXISTS `knowledge_documents`;
@@ -46,26 +56,58 @@ ENGINE = InnoDB
 COMMENT = '存储所有系统用户，包括学生、教师和管理员';
 
 
+-- =====================================================
+-- 简化的混合方案数据库设计
+-- 核心思路：Markdown为主，数据库提供索引和扩展功能
+-- =====================================================
+
 -- -----------------------------------------------------
 -- 核心表: 课程 (courses)
 -- -----------------------------------------------------
 CREATE TABLE `courses` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '课程唯一ID',
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '课程ID',
   `title` VARCHAR(255) NOT NULL COMMENT '课程名称',
-  `description` TEXT NULL COMMENT '课程详细描述',
-  `teacher_id` INT NOT NULL COMMENT '外键, 关联到users表的教师ID',
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '课程创建时间',
-  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息最后更新时间',
-  `deleted` TINYINT(1) NULL DEFAULT 0 COMMENT '逻辑删除标志',
+  `description` TEXT NULL COMMENT '课程描述',
+  `teacher_id` INT NOT NULL COMMENT '教师ID',
+  `file_path` VARCHAR(500) NOT NULL COMMENT 'Markdown文件路径',
+  `file_hash` VARCHAR(64) NULL COMMENT '文件内容哈希，用于检测变化',
+  `file_updated_at` TIMESTAMP NULL COMMENT '文件最后修改时间',
+  `parse_status` ENUM('pending', 'success', 'failed') DEFAULT 'pending' COMMENT '解析状态',
+  `parse_error` TEXT NULL COMMENT '解析错误信息',
+  `parsed_at` TIMESTAMP NULL COMMENT '最后解析时间',
+  `chapter_count` INT DEFAULT 0 COMMENT '章节数量',
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` TINYINT(1) DEFAULT 0,
   PRIMARY KEY (`id`),
-  INDEX `fk_courses_teacher_id_idx` (`teacher_id` ASC),
-  CONSTRAINT `fk_courses_teacher_id`
-    FOREIGN KEY (`teacher_id`)
-    REFERENCES `users` (`id`)
-    ON DELETE CASCADE
-)
-ENGINE = InnoDB
-COMMENT = '存储教师创建的课程信息';
+  INDEX `idx_teacher` (`teacher_id`),
+  INDEX `idx_parse_status` (`parse_status`),
+  INDEX `idx_file_hash` (`file_hash`)
+) ENGINE = InnoDB COMMENT = '课程基本信息和Markdown文件元数据';
+
+-- -----------------------------------------------------
+-- 解析缓存表: 章节信息 (chapters)
+-- -----------------------------------------------------
+CREATE TABLE `chapters` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `course_id` INT NOT NULL COMMENT '课程ID',
+  `chapter_key` VARCHAR(100) NOT NULL COMMENT '章节标识（如: 1, 1.1, 1.2.1）',
+  `parent_key` VARCHAR(100) NULL COMMENT '父章节标识',
+  `level` INT NOT NULL COMMENT '层级深度 1,2,3...',
+  `title` VARCHAR(255) NOT NULL COMMENT '章节标题',
+  `content` MEDIUMTEXT NULL COMMENT '章节内容',
+  `sort_order` INT NOT NULL COMMENT '排序序号',
+  `line_start` INT NULL COMMENT '起始行号',
+  `line_end` INT NULL COMMENT '结束行号',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_course_chapter` (`course_id`, `chapter_key`),
+  INDEX `idx_parent` (`parent_key`),
+  INDEX `idx_level_sort` (`course_id`, `level`, `sort_order`),
+  CONSTRAINT `fk_chapters_course`
+    FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB COMMENT = '章节解析缓存，用于快速查询和导航';
 
 
 -- -----------------------------------------------------
@@ -182,140 +224,114 @@ COMMENT = '存储上传的教学资源，如课件、视频、文档等';
 
 
 -- -----------------------------------------------------
--- 教学表: 考核 (assessments)
+-- 功能扩展表: 章节练习 (chapter_exercises)
 -- -----------------------------------------------------
-CREATE TABLE `assessments` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '考核唯一ID',
-  `title` VARCHAR(255) NOT NULL COMMENT '考核标题 (如: 期中测试)',
-  `course_id` INT NOT NULL COMMENT '外键, 关联到courses表的所属课程ID',
-  `creator_id` INT NOT NULL COMMENT '外键, 关联到users表的创建者(教师)ID',
-  `type` ENUM('exam', 'assignment', 'project') NOT NULL COMMENT '考核类型: 考试, 作业, 项目',
-  `due_date` TIMESTAMP NULL COMMENT '考核截止日期',
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '考核创建时间',
-  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息最后更新时间',
-  `deleted` TINYINT(1) NULL DEFAULT 0 COMMENT '逻辑删除标志',
+CREATE TABLE `chapter_exercises` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '练习唯一ID',
+  `course_id` INT NOT NULL COMMENT '课程ID',
+  `chapter_id` VARCHAR(100) NOT NULL COMMENT '关联的章节ID',
+  `title` VARCHAR(255) NOT NULL COMMENT '练习标题',
+  `description` TEXT NULL COMMENT '练习描述',
+  `exercise_type` ENUM('choice', 'fill_blank', 'code', 'essay') NOT NULL COMMENT '练习类型',
+  `content` JSON NULL COMMENT '练习内容（JSON格式，根据类型存储不同结构）',
+  `answer` JSON NULL COMMENT '参考答案',
+  `difficulty` ENUM('easy', 'medium', 'hard') DEFAULT 'medium' COMMENT '难度级别',
+  `sort_order` INT DEFAULT 0 COMMENT '在章节中的排序',
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` TINYINT(1) DEFAULT 0 COMMENT '逻辑删除标志',
   PRIMARY KEY (`id`),
-  INDEX `fk_assessments_course_id_idx` (`course_id` ASC),
-  INDEX `fk_assessments_creator_id_idx` (`creator_id` ASC),
-  CONSTRAINT `fk_assessments_course_id`
+  INDEX `idx_exercises_chapter` (`course_id`, `chapter_id`),
+  INDEX `idx_exercises_type` (`exercise_type`),
+  INDEX `idx_exercises_difficulty` (`difficulty`),
+  CONSTRAINT `fk_exercises_course_id`
     FOREIGN KEY (`course_id`)
     REFERENCES `courses` (`id`)
+    ON DELETE CASCADE
+) ENGINE = InnoDB COMMENT = '章节练习表，为特定章节创建练习题';
+
+-- -----------------------------------------------------
+-- 功能扩展表: 练习提交记录 (exercise_submissions)
+-- -----------------------------------------------------
+CREATE TABLE `exercise_submissions` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '提交记录唯一ID',
+  `exercise_id` INT NOT NULL COMMENT '外键, 关联到chapter_exercises表的练习ID',
+  `user_id` INT NOT NULL COMMENT '外键, 关联到users表的学生ID',
+  `submitted_answer` JSON NOT NULL COMMENT '学生提交的答案 (JSON格式)',
+  `is_correct` TINYINT(1) NULL COMMENT '答案是否正确 (1: 正确, 0: 错误, NULL: 待批改)',
+  `score` DECIMAL(5, 2) NULL COMMENT '得分',
+  `feedback` TEXT NULL COMMENT '教师或系统的反馈',
+  `submission_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `idx_submission_exercise_id` (`exercise_id`),
+  INDEX `idx_submission_user_id` (`user_id`),
+  UNIQUE KEY `uk_submission_user_exercise` (`user_id`, `exercise_id`) COMMENT '确保同一用户对同一练习只能提交一次 (如果业务需要可多次，则移除此唯一约束)',
+  CONSTRAINT `fk_submission_exercise_id`
+    FOREIGN KEY (`exercise_id`)
+    REFERENCES `chapter_exercises` (`id`)
     ON DELETE CASCADE,
-  CONSTRAINT `fk_assessments_creator_id`
-    FOREIGN KEY (`creator_id`)
+  CONSTRAINT `fk_submission_user_id`
+    FOREIGN KEY (`user_id`)
     REFERENCES `users` (`id`)
     ON DELETE CASCADE
 )
 ENGINE = InnoDB
-COMMENT = '定义一次考核（如测验、作业、实训项目）';
-
+COMMENT = '记录学生对章节练习的提交答案和批改情况';
 
 -- -----------------------------------------------------
--- 教学表: 题库 (questions)
+-- 功能扩展表: 学习进度 (learning_progress)
 -- -----------------------------------------------------
-CREATE TABLE `questions` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '题目唯一ID',
-  `content` TEXT NOT NULL COMMENT '题目内容 (题干)',
-  `type` ENUM('single_choice', 'multi_choice', 'true_false', 'fill_blank', 'short_answer') NOT NULL COMMENT '题型',
-  `options` JSON NULL COMMENT '存储选择题选项, 格式为 {"A": "...", "B": "..."}',
-  `correct_answer` TEXT NOT NULL COMMENT '题目的正确答案',
-  `explanation` TEXT NULL COMMENT '答案的详细解析',
-  `creator_id` INT NOT NULL COMMENT '外键, 关联到users表的题目创建者ID',
-  `knowledge_point` VARCHAR(255) NULL COMMENT '题目关联的知识点',
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '题目创建时间',
-  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息最后更新时间',
-  `deleted` TINYINT(1) NULL DEFAULT 0 COMMENT '逻辑删除标志',
+CREATE TABLE `learning_progress` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '进度记录唯一ID',
+  `user_id` INT NOT NULL COMMENT '学习者用户ID',
+  `course_id` INT NOT NULL COMMENT '课程ID',
+  `chapter_id` VARCHAR(100) NOT NULL COMMENT '章节ID',
+  `status` ENUM('not_started', 'in_progress', 'completed') DEFAULT 'not_started' COMMENT '学习状态',
+  `progress_percentage` DECIMAL(5,2) DEFAULT 0.00 COMMENT '学习进度百分比',
+  `reading_time_seconds` INT DEFAULT 0 COMMENT '阅读时长（秒）',
+  `last_read_position` INT DEFAULT 0 COMMENT '最后阅读位置（字符偏移量）',
+  `first_visit_time` TIMESTAMP NULL COMMENT '首次访问时间',
+  `last_visit_time` TIMESTAMP NULL COMMENT '最后访问时间',
+  `completion_time` TIMESTAMP NULL COMMENT '完成时间',
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_questions_creator_id_idx` (`creator_id` ASC),
-  CONSTRAINT `fk_questions_creator_id`
-    FOREIGN KEY (`creator_id`)
+  UNIQUE KEY `uk_progress_user_chapter` (`user_id`, `course_id`, `chapter_id`),
+  INDEX `idx_progress_course` (`course_id`),
+  INDEX `idx_progress_status` (`status`),
+  CONSTRAINT `fk_progress_user_id`
+    FOREIGN KEY (`user_id`)
     REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-)
-ENGINE = InnoDB
-COMMENT = '存储所有考核的题目，形成题库';
-
-
--- -----------------------------------------------------
--- 教学表: 考核-题目关联 (assessment_questions)
--- -----------------------------------------------------
-CREATE TABLE `assessment_questions` (
-  `assessment_id` INT NOT NULL COMMENT '外键, 关联到assessments表的考核ID',
-  `question_id` INT NOT NULL COMMENT '外键, 关联到questions表的题目ID',
-  `points` INT NULL DEFAULT 10 COMMENT '该题目在本次考核中的分值',
-  PRIMARY KEY (`assessment_id`, `question_id`),
-  INDEX `fk_aq_question_id_idx` (`question_id` ASC),
-  CONSTRAINT `fk_aq_assessment_id`
-    FOREIGN KEY (`assessment_id`)
-    REFERENCES `assessments` (`id`)
     ON DELETE CASCADE,
-  CONSTRAINT `fk_aq_question_id`
-    FOREIGN KEY (`question_id`)
-    REFERENCES `questions` (`id`)
+  CONSTRAINT `fk_progress_course_id`
+    FOREIGN KEY (`course_id`)
+    REFERENCES `courses` (`id`)
     ON DELETE CASCADE
-)
-ENGINE = InnoDB
-COMMENT = '考核与题目的多对多关系链接表, 主要用于考试和作业';
-
+) ENGINE = InnoDB COMMENT = '学习进度跟踪表，记录用户对每个章节的学习情况';
 
 -- -----------------------------------------------------
--- 教学表: 学生提交记录 (submissions)
+-- 扩展功能表: 章节评论 (chapter_comments)
 -- -----------------------------------------------------
-CREATE TABLE `submissions` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '提交记录的唯一ID',
-  `assessment_id` INT NOT NULL COMMENT '外键, 关联到assessments表的考核ID',
-  `student_id` INT NOT NULL COMMENT '外键, 关联到users表的学生ID',
-  `status` ENUM('in_progress', 'submitted', 'graded') NULL DEFAULT 'in_progress' COMMENT '提交状态: 进行中, 已提交, 已评分',
-  `score` DECIMAL(5,2) NULL COMMENT '本次提交的总得分',
-  `submission_content` TEXT NULL COMMENT '用于存储提交内容, 如项目代码仓库链接、文件路径或文本',
-  `feedback` TEXT NULL COMMENT '教师对本次提交的总体评语',
-  `grading_details` JSON NULL COMMENT '用于存储评分细则, 如 {"功能完整性": "28/30", "代码质量": "22/25"}',
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
-  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '信息最后更新时间',
-  `deleted` TINYINT(1) NULL DEFAULT 0 COMMENT '逻辑删除标志',
+CREATE TABLE `chapter_comments` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `course_id` INT NOT NULL,
+  `chapter_key` VARCHAR(100) NOT NULL COMMENT '章节标识',
+  `user_id` INT NOT NULL,
+  `content` TEXT NOT NULL COMMENT '评论内容',
+  `parent_id` INT NULL COMMENT '父评论ID',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` TINYINT(1) DEFAULT 0,
   PRIMARY KEY (`id`),
-  INDEX `fk_submissions_assessment_id_idx` (`assessment_id` ASC),
-  INDEX `fk_submissions_student_id_idx` (`student_id` ASC),
-  UNIQUE INDEX `assessment_student_unique` (`assessment_id` ASC, `student_id` ASC) COMMENT '确保学生对同一考核只能提交一次',
-  CONSTRAINT `fk_submissions_assessment_id`
-    FOREIGN KEY (`assessment_id`)
-    REFERENCES `assessments` (`id`)
-    ON DELETE CASCADE,
-  CONSTRAINT `fk_submissions_student_id`
-    FOREIGN KEY (`student_id`)
-    REFERENCES `users` (`id`)
-    ON DELETE CASCADE
-)
-ENGINE = InnoDB
-COMMENT = '记录学生提交的每一次考核';
-
-
--- -----------------------------------------------------
--- 教学表: 学生答案 (answers)
--- -----------------------------------------------------
-CREATE TABLE `answers` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '答案记录的唯一ID',
-  `submission_id` INT NOT NULL COMMENT '外键, 关联到submissions表的提交ID',
-  `question_id` INT NOT NULL COMMENT '外键, 关联到questions表的题目ID',
-  `student_answer` TEXT NULL COMMENT '学生提交的答案内容',
-  `is_correct` BOOLEAN NULL COMMENT '该答案是否正确 (用于客观题自动批改)',
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `deleted` TINYINT(1) NULL DEFAULT 0 COMMENT '逻辑删除标志',
-  PRIMARY KEY (`id`),
-  INDEX `fk_answers_submission_id_idx` (`submission_id` ASC),
-  INDEX `fk_answers_question_id_idx` (`question_id` ASC),
-  CONSTRAINT `fk_answers_submission_id`
-    FOREIGN KEY (`submission_id`)
-    REFERENCES `submissions` (`id`)
-    ON DELETE CASCADE,
-  CONSTRAINT `fk_answers_question_id`
-    FOREIGN KEY (`question_id`)
-    REFERENCES `questions` (`id`)
-    ON DELETE CASCADE
-)
-ENGINE = InnoDB
-COMMENT = '存储学生对具体题目的答案(主要用于考试/作业)';
+  INDEX `idx_chapter` (`course_id`, `chapter_key`),
+  INDEX `idx_user` (`user_id`),
+  INDEX `idx_parent` (`parent_id`),
+  CONSTRAINT `fk_comments_course`
+    FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB COMMENT = '章节评论';
 
 
 -- -----------------------------------------------------
@@ -340,6 +356,26 @@ CREATE TABLE `knowledge_documents` (
 )
 ENGINE = InnoDB
 COMMENT = '用于管理AI知识库的源文档';
+
+
+-- -----------------------------------------------------
+-- 辅助表: 文件同步日志 (sync_logs)
+-- -----------------------------------------------------
+CREATE TABLE `sync_logs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `course_id` INT NOT NULL,
+  `operation` ENUM('parse', 'update', 'delete') NOT NULL,
+  `status` ENUM('success', 'failed') NOT NULL,
+  `message` TEXT NULL COMMENT '操作信息或错误信息',
+  `duration_ms` INT DEFAULT 0 COMMENT '处理耗时',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `idx_course` (`course_id`),
+  INDEX `idx_status` (`status`),
+  INDEX `idx_created` (`created_at`),
+  CONSTRAINT `fk_logs_course`
+    FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB COMMENT = '文件同步操作日志';
 
 
 -- -----------------------------------------------------
@@ -380,4 +416,39 @@ CREATE TABLE `chat_messages` (
     ON DELETE CASCADE
 )
 ENGINE = InnoDB
-COMMENT = '存储学生与AI学习助手的聊天记录'; 
+COMMENT = '存储学生与AI学习助手的聊天记录';
+
+-- =====================================================
+-- 实用视图
+-- =====================================================
+
+-- 课程章节树形视图
+CREATE VIEW `v_chapter_tree` AS
+SELECT 
+    c.id,
+    c.course_id,
+    c.chapter_key,
+    c.parent_key,
+    c.level,
+    c.title,
+    c.sort_order,
+    course.title as course_title
+FROM chapters c
+JOIN courses course ON c.course_id = course.id
+WHERE course.deleted = 0
+ORDER BY c.course_id, c.level, c.sort_order;
+
+-- 学习进度统计视图
+CREATE VIEW `v_learning_stats` AS
+SELECT 
+    lp.user_id,
+    lp.course_id,
+    COUNT(*) as total_chapters,
+    SUM(CASE WHEN lp.status = 'completed' THEN 1 ELSE 0 END) as completed_count,
+    ROUND(AVG(lp.progress_percentage), 2) as avg_progress,
+    SUM(lp.reading_time_seconds) as total_read_time,
+    MAX(lp.last_visit_time) as last_read_at
+FROM learning_progress lp
+JOIN courses c ON lp.course_id = c.id
+WHERE c.deleted = 0
+GROUP BY lp.user_id, lp.course_id; 

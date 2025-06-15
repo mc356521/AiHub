@@ -81,6 +81,22 @@
     *   **`JwtAuthenticationFilter`**: 在每个请求中校验JWT的有效性。
     *   **`UserDetailsServiceImpl`**: 连接Spring Security与`UsersService`，用于加载用户认证信息。
 *   **路径豁免**: 无需认证的路径（如登录/注册、Swagger文档）已在 `SecurityConfig` 中通过 `.requestMatchers()` 配置。
+*   **获取当前登录用户信息**: 在Service层中，如果需要获取当前登录用户的完整信息（如用户ID、角色等），必须遵循以下步骤：
+    1.  从`SecurityContextHolder`获取`UserDetails`主体。
+    2.  从`UserDetails`中获取用户名。
+    3.  通过注入的`UsersService`使用该用户名从数据库中查询完整的`Users`实体。
+    *   示例 (`CoursesServiceImpl.java`):
+        ```java
+        @Autowired
+        private UsersService usersService;
+
+        public void someBusinessMethod() {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = ((UserDetails) principal).getUsername();
+            Users currentUser = usersService.findByUsername(username);
+            // 现在可以使用currentUser对象了，例如: currentUser.getId()
+        }
+        ```
 
 ### 7. 代码生成器
 
