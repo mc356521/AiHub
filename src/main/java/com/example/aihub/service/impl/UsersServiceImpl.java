@@ -46,10 +46,13 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         user.setEmail(registerRequest.getEmail());
         user.setFullName(registerRequest.getFullName());
         user.setUserCode(registerRequest.getUserCode());
-        user.setAvatar(registerRequest.getAvatar());
         user.setPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
-        // 默认角色为学生
-        user.setRole("student");
+        // 处理角色，默认为学生
+        String role = registerRequest.getRole();
+        if (!"teacher".equals(role)) {
+            role = "student";
+        }
+        user.setRole(role);
 
         save(user);
         return user;
