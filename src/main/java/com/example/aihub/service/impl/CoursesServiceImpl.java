@@ -46,6 +46,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.Stack;
 import java.io.FileNotFoundException;
+import java.nio.file.StandardOpenOption;
 
 /**
  * 课程服务实现类，负责处理课程创建、解析、查询等核心业务逻辑。
@@ -137,16 +138,26 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         LocalDateTime fileUpdatedAt;
         String fileHash;
         try {
-            Path filePath = Paths.get(storagePath, course.getFilePath()).normalize();
-            if (!Files.exists(filePath)) {
-                throw new FileNotFoundException("课程文件不存在: " + filePath);
+            String relativePath = course.getFilePath();
+            // 兼容处理：检查数据库中存储的路径是否已包含根目录（为了兼容脏数据）
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                // 如果是 'courses-md/xxxx.md' 格式，直接使用
+                filePath = Paths.get(relativePath);
+            } else {
+                // 如果是 'xxxx.md' 格式，与根目录拼接
+                filePath = Paths.get(storagePath, relativePath);
             }
 
-            byte[] fileBytes = Files.readAllBytes(filePath);
+            if (!Files.exists(filePath.normalize())) {
+                throw new FileNotFoundException("课程文件不存在: " + filePath.normalize());
+            }
+
+            byte[] fileBytes = Files.readAllBytes(filePath.normalize());
             content = new String(fileBytes, StandardCharsets.UTF_8);
 
             // 获取文件最后修改时间
-            FileTime lastModifiedTime = Files.getLastModifiedTime(filePath);
+            FileTime lastModifiedTime = Files.getLastModifiedTime(filePath.normalize());
             fileUpdatedAt = LocalDateTime.ofInstant(lastModifiedTime.toInstant(), ZoneId.systemDefault());
 
             // 计算文件内容的SHA-256哈希，用于版本比对
@@ -346,14 +357,59 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         }
 
         try {
-            Path filePath = Paths.get(storagePath, relativePath).normalize();
-            if (!Files.exists(filePath)) {
-                throw new FileNotFoundException("课程文件不存在: " + filePath);
+            // 兼容处理：检查数据库中存储的路径是否已包含根目录（为了兼容脏数据）
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                // 如果是 'courses-md/xxxx.md' 格式，直接使用
+                filePath = Paths.get(relativePath);
+            } else {
+                // 如果是 'xxxx.md' 格式，与根目录拼接
+                filePath = Paths.get(storagePath, relativePath);
             }
-            return Files.readString(filePath, StandardCharsets.UTF_8);
+
+            if (!Files.exists(filePath.normalize())) {
+                throw new FileNotFoundException("课程文件不存在: " + filePath.normalize());
+            }
+            return Files.readString(filePath.normalize(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             // 将IO异常包装成更通用的Exception，由全局异常处理器捕获
             throw new Exception("读取课程文件时发生错误", e);
         }
+    }
+
+    @Override
+    @Transactional
+    public void updateCourseContent(Integer courseId, String content) throws Exception {
+        // 1. 获取课程信息
+        Courses course = this.getById(courseId);
+        if (course == null) {
+            throw new RuntimeException("课程不存在");
+        }
+
+        // 2. 验证用户权限
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+
+        if (!currentUser.getId().equals(Long.valueOf(course.getTeacherId())) && !"admin".equals(currentUser.getRole())) {
+            throw new SecurityException("无权修改此课程");
+        }
+
+        // 3. 写入文件
+        String relativePath = course.getFilePath();
+        try {
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                filePath = Paths.get(relativePath);
+            } else {
+                filePath = Paths.get(storagePath, relativePath);
+            }
+            Files.writeString(filePath.normalize(), content, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            throw new Exception("写入课程文件时发生错误", e);
+        }
+
+        // 4. 立即重新解析章节
+        this.parseAndSaveChapters(courseId);
     }
 }

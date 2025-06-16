@@ -96,4 +96,24 @@ public class CoursesController extends BaseController {
         log.debug("成功获取到课程内容，课程ID: {}", courseId);
         return Result.success(content, "获取课程内容成功");
     }
+
+    /**
+     * 更新指定课程的Markdown原文内容。
+     * 此接口需要 'teacher' 或 'admin' 权限，并且只能由课程所有者操作。
+     * 更新后会自动重新解析课程章节。
+     *
+     * @param courseId 课程ID
+     * @param content  新的Markdown内容
+     * @return 操作结果
+     * @throws Exception 如果文件写入或解析失败
+     */
+    @Operation(summary = "更新课程Markdown原文", description = "更新指定课程的Markdown文件内容，并自动重新解析章节。只有课程所有者或管理员可以访问。")
+    @PutMapping("/{courseId}/content")
+    @PreAuthorize("hasAnyAuthority('teacher', 'admin')")
+    public Result<?> updateCourseContent(@PathVariable Integer courseId, @RequestBody String content) throws Exception {
+        log.info("请求更新课程Markdown内容，课程ID: {}", courseId);
+        coursesService.updateCourseContent(courseId, content);
+        log.info("课程内容更新并重新解析成功，课程ID: {}", courseId);
+        return Result.success(null, "课程内容更新成功");
+    }
 } 

@@ -46,4 +46,6 @@ public interface CoursesService extends IService<Courses> {
      * @throws Exception 如果文件不存在或读取时发生IO错误
      */
     String getCourseMarkdownContent(Integer courseId) throws Exception;
+
+    void updateCourseContent(Integer courseId, String content) throws Exception;
 }
