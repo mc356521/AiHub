@@ -45,6 +45,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.Stack;
+import java.io.FileNotFoundException;
 
 /**
  * <p>
@@ -110,7 +111,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             // 创建空文件
             Files.createFile(filePath);
 
-            course.setFilePath(filePath.toString().replace(File.separator, "/"));
+            course.setFilePath(fileName);
         } catch (IOException e) {
             log.error("创建Markdown文件失败", e);
             throw new RuntimeException("创建课程文件时发生错误", e);
@@ -312,5 +313,29 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         QueryWrapper<Courses> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("teacher_id", currentUser.getId());
         return list(queryWrapper);
+    }
+
+    @Override
+    public String getCourseMarkdownContent(Integer courseId) throws Exception {
+        Courses course = this.getById(courseId);
+        if (course == null) {
+            throw new RuntimeException("课程不存在");
+        }
+
+        String relativePath = course.getFilePath();
+        if (relativePath == null || relativePath.isBlank()) {
+            throw new RuntimeException("课程文件路径未设置");
+        }
+
+        try {
+            Path filePath = Paths.get(storagePath, relativePath).normalize();
+            if (!Files.exists(filePath)) {
+                throw new FileNotFoundException("课程文件不存在: " + filePath);
+            }
+            return Files.readString(filePath, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            // 在实际应用中，这里应该记录日志
+            throw new Exception("读取课程文件时发生错误", e);
+        }
     }
 }

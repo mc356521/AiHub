@@ -18,4 +18,5 @@ public interface CoursesService extends IService<Courses> {
     Courses createCourse(CreateCourseRequest request);
     void parseAndSaveChapters(Integer courseId) throws Exception;
     List<Courses> getMyCourses();
+    String getCourseMarkdownContent(Integer courseId) throws Exception;
 }
