@@ -14,18 +14,20 @@ import com.example.aihub.dto.RegisterRequest;
  */
 public interface UsersService extends IService<Users> {
     /**
-     * 根据用户名获取用户
+     * 根据用户名查找用户实体。
      *
      * @param username 用户名
-     * @return 用户信息
+     * @return 匹配的用户实体，如果不存在则返回 null
      */
     Users findByUsername(String username);
 
     /**
-     * 注册新用户
+     * 注册一个新用户。
+     * 该方法会处理密码加密和角色分配。
      *
-     * @param registerRequest 注册请求
-     * @return 创建的用户信息
+     * @param registerRequest 包含新用户所有必需信息的注册请求
+     * @return 已创建并保存到数据库的用户实体
+     * @throws RuntimeException 如果用户名或邮箱已存在
      */
     Users register(RegisterRequest registerRequest);
 }

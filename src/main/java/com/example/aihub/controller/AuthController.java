@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 认证控制器，负责处理用户登录和注册的请求。
+ * 继承自 BaseController 以使用全局异常处理。
+ */
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "用户认证", description = "提供用户登录和注册功能")
@@ -35,6 +39,13 @@ public class AuthController extends BaseController {
     @Autowired
     private UsersService usersService;
 
+    /**
+     * 处理用户登录请求。
+     * 使用用户名和密码进行认证，如果成功，则生成并返回一个JWT。
+     *
+     * @param loginRequest 包含用户名和密码的登录请求体
+     * @return 包含JWT的Result响应
+     */
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "用户使用用户名和密码进行登录认证，成功后返回JWT")
     public Result<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
@@ -62,6 +73,12 @@ public class AuthController extends BaseController {
         }
     }
 
+    /**
+     * 处理新用户注册请求。
+     *
+     * @param registerRequest 包含新用户信息的注册请求体
+     * @return 操作结果，成功则无返回数据
+     */
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "提供新用户注册功能")
     public Result<Void> register(@RequestBody RegisterRequest registerRequest) {

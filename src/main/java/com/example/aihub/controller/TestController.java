@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 测试控制器
+ * 测试控制器，提供用于系统健康检查和功能验证的接口。
  */
 @RestController
 @RequestMapping("/test")
@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestController extends BaseController {
 
+    /**
+     * 服务可用性测试接口。
+     * 访问此接口将返回一个固定的成功消息，用于验证服务是否已成功启动并能够响应请求。
+     *
+     * @return 包含 "Hello World" 信息的Result响应
+     */
     @GetMapping("/hello")
     @Operation(summary = "服务可用性测试", description = "返回一个'Hello World'字符串，用于检测服务是否正常运行")
     public Result<String> hello() {

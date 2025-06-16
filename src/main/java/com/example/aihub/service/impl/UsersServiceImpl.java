@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.aihub.dto.RegisterRequest;
 
 /**
- * <p>
- * 存储所有系统用户，包括学生、教师和管理员 服务实现类
- * </p>
+ * 用户服务实现类，处理用户相关的业务逻辑。
  *
  * @author AIHub Code Generator
  * @since 2025-06-15
@@ -46,11 +44,13 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         user.setEmail(registerRequest.getEmail());
         user.setFullName(registerRequest.getFullName());
         user.setUserCode(registerRequest.getUserCode());
+        // 重要：对用户密码进行哈希加密
         user.setPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
-        // 处理角色，默认为学生
+        
+        // 安全处理：防止通过注册接口将角色设置为 'admin'
         String role = registerRequest.getRole();
         if (!"teacher".equals(role)) {
-            role = "student";
+            role = "student"; // 默认为学生
         }
         user.setRole(role);
 
