@@ -1,6 +1,7 @@
 package com.example.aihub.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Chapters;
 import com.example.aihub.entity.Courses;
@@ -36,6 +37,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,5 +290,27 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         course.setFileHash(fileHash);
         course.setFileUpdatedAt(fileUpdatedAt);
         this.updateById(course);
+    }
+
+    @Override
+    public List<Courses> getMyCourses() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            // 在实际应用中，不太可能发生，因为JWT过滤器已经验证了用户存在
+            // 但作为防御性编程，我们返回一个空列表
+            return Collections.emptyList();
+        }
+
+        QueryWrapper<Courses> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("teacher_id", currentUser.getId());
+        return list(queryWrapper);
     }
 }

@@ -4,6 +4,8 @@ import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Courses;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程基本信息和Markdown文件元数据 服务类
@@ -14,5 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CoursesService extends IService<Courses> {
     Courses createCourse(CreateCourseRequest request);
-    void parseAndSaveChapters(Integer courseId);
+    void parseAndSaveChapters(Integer courseId) throws Exception;
+    List<Courses> getMyCourses();
 }

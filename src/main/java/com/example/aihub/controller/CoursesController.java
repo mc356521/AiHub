@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hahaha
  * @since 2024-07-25
  */
-@Tag(name = "课程管理", description = "提供课程的增删改查功能")
+@Tag(name = "课程管理", description = "提供课程的增删改查及解析功能")
 @RestController
 @RequestMapping("/courses")
 public class CoursesController {
@@ -56,5 +59,13 @@ public class CoursesController {
         } catch (Exception e) {
             return Result.failed("课程解析失败: " + e.getMessage());
         }
+    }
+
+    @Operation(summary = "获取当前教师的课程列表", description = "获取当前登录的教师用户创建的所有课程列表。")
+    @GetMapping("/my")
+    @PreAuthorize("hasAuthority('teacher')")
+    public Result<List<Courses>> getMyCourses() {
+        List<Courses> courses = coursesService.getMyCourses();
+        return Result.success(courses, "获取我的课程列表成功");
     }
 } 

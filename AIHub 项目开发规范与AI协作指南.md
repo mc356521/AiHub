@@ -1,7 +1,9 @@
 # AIHub 项目开发规范与AI协作指南
 
 **核心目标**: 为 `AIHub` 项目建立统一、精确的开发标准和协作规范。本文档是根据当前项目状态生成的，请在后续所有开发任务中严格遵守。
-文档目录是http://localhost:8080/swagger-ui/index.html
+
+API服务器接口文档目录
+http://localhost:8080/swagger-ui/index.html
 ---
 
 ### 1. 项目概览
