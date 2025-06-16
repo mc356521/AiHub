@@ -16749,3 +16749,1690 @@ model.summary()
 2025-06-17 02:32:12.580 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
 2025-06-17 02:32:12.582 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
 2025-06-17 02:32:12.584 [http-nio-8080-exec-5] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:36:27.775 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-17 02:36:27.801 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-17 02:36:43.909 [main] INFO  com.example.aihub.AiHubApplication - Starting AiHubApplication using Java 17.0.12 with PID 23404 (D:\JAVA\AIHub\target\classes started by ZhuanZ（无密码） in D:\JAVA\AIHub)
+2025-06-17 02:36:43.911 [main] DEBUG com.example.aihub.AiHubApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-06-17 02:36:43.912 [main] INFO  com.example.aihub.AiHubApplication - No active profile set, falling back to 1 default profile: "default"
+2025-06-17 02:36:45.603 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-06-17 02:36:45.610 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-06-17 02:36:45.688 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 0 Redis repository interfaces.
+2025-06-17 02:36:47.113 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-06-17 02:36:47.141 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-06-17 02:36:47.144 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-17 02:36:47.145 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-06-17 02:36:47.335 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-17 02:36:47.336 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3363 ms
+2025-06-17 02:36:48.497 [main] DEBUG com.example.aihub.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-06-17 02:36:48.613 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-06-17 02:36:50.848 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-06-17 02:36:50.900 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-06-17 02:36:50.926 [main] INFO  com.example.aihub.AiHubApplication - Started AiHubApplication in 7.686 seconds (process running for 8.95)
+2025-06-17 02:37:04.714 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-17 02:37:04.716 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-06-17 02:37:04.719 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-06-17 02:37:05.098 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-17 02:37:05.715 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@474cefd7
+2025-06-17 02:37:05.718 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-17 02:37:05.740 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:05.798 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:05.859 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:05.947 [http-nio-8080-exec-1] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:37:05.949 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:05.949 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:05.964 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:05.966 [http-nio-8080-exec-1] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:37:28.007 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:28.008 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:28.012 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:28.044 [http-nio-8080-exec-2] INFO  com.example.aihub.controller.CoursesController - 请求更新课程Markdown内容，课程ID: 1
+2025-06-17 02:37:28.070 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:28.070 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:28.074 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:28.075 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:28.076 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:28.077 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:28.360 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:37:28.366 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 123人工智能导论', level: 1
+2025-06-17 02:37:28.366 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.366 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.366 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:37:28.367 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:37:28.368 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.369 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:37:28.369 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:37:28.369 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:37:28.369 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:37:28.370 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:37:28.371 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 11 ---
+2025-06-17 02:37:28.372 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:37:28.372 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:37:28.376 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:37:28.384 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.387 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:37:28.388 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 123人工智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:37:28.385922400(LocalDateTime), 2025-06-17T02:37:28.386922(LocalDateTime)
+2025-06-17 02:37:28.390 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.390 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:37:28.390921700(LocalDateTime), 2025-06-17T02:37:28.390921700(LocalDateTime)
+2025-06-17 02:37:28.391 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.392 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:37:28.391921800(LocalDateTime), 2025-06-17T02:37:28.391921800(LocalDateTime)
+2025-06-17 02:37:28.393 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.393 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 4(Integer), 28(Integer), 76(Integer), 2025-06-17T02:37:28.393951400(LocalDateTime), 2025-06-17T02:37:28.393951400(LocalDateTime)
+2025-06-17 02:37:28.394 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.394 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:37:28.394950300(LocalDateTime), 2025-06-17T02:37:28.394950300(LocalDateTime)
+2025-06-17 02:37:28.396 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.397 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:37:28.396948200(LocalDateTime), 2025-06-17T02:37:28.396948200(LocalDateTime)
+2025-06-17 02:37:28.399 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.400 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:37:28.399954800(LocalDateTime), 2025-06-17T02:37:28.399954800(LocalDateTime)
+2025-06-17 02:37:28.402 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.403 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:37:28.402466700(LocalDateTime), 2025-06-17T02:37:28.402466700(LocalDateTime)
+2025-06-17 02:37:28.403 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.404 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 9(Integer), 77(Integer), 97(Integer), 2025-06-17T02:37:28.403985200(LocalDateTime), 2025-06-17T02:37:28.404985400(LocalDateTime)
+2025-06-17 02:37:28.405 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.406 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:37:28.405986100(LocalDateTime), 2025-06-17T02:37:28.405986100(LocalDateTime)
+2025-06-17 02:37:28.407 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:28.408 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:37:28.407984800(LocalDateTime), 2025-06-17T02:37:28.407984800(LocalDateTime)
+2025-06-17 02:37:28.437 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.438 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:37:28.439 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 859(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:37:28.390921700(LocalDateTime), 2025-06-17T02:37:28.390921700(LocalDateTime), 860(Long)
+2025-06-17 02:37:28.439 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.440 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 859(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:37:28.391921800(LocalDateTime), 2025-06-17T02:37:28.391921800(LocalDateTime), 861(Long)
+2025-06-17 02:37:28.440 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.441 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 862(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:37:28.394950300(LocalDateTime), 2025-06-17T02:37:28.394950300(LocalDateTime), 863(Long)
+2025-06-17 02:37:28.442 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.443 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 863(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:37:28.396948200(LocalDateTime), 2025-06-17T02:37:28.396948200(LocalDateTime), 864(Long)
+2025-06-17 02:37:28.443 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.444 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 863(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:37:28.399954800(LocalDateTime), 2025-06-17T02:37:28.399954800(LocalDateTime), 865(Long)
+2025-06-17 02:37:28.445 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.446 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 862(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:37:28.402466700(LocalDateTime), 2025-06-17T02:37:28.402466700(LocalDateTime), 866(Long)
+2025-06-17 02:37:28.447 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.449 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 867(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:37:28.405986100(LocalDateTime), 2025-06-17T02:37:28.405986100(LocalDateTime), 868(Long)
+2025-06-17 02:37:28.450 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.452 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 867(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:37:28.407984800(LocalDateTime), 2025-06-17T02:37:28.407984800(LocalDateTime), 869(Long)
+2025-06-17 02:37:28.469 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:28.470 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:37:28.472 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), baf4939d435f9955f01117d58dd862efdfb553f471797af47888726a1ff7be18(String), 2025-06-17T02:37:28.079523800(LocalDateTime), success(String), 2025-06-17T02:37:28.465695300(LocalDateTime), 11(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:37:28.477 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:37:28.487 [http-nio-8080-exec-2] INFO  com.example.aihub.controller.CoursesController - 课程内容更新并重新解析成功，课程ID: 1
+2025-06-17 02:37:30.001 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:30.002 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:30.006 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:30.022 [http-nio-8080-exec-3] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:37:30.022 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:30.023 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:30.026 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:30.027 [http-nio-8080-exec-3] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:37:31.120 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:31.121 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:31.123 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:31.129 [http-nio-8080-exec-4] INFO  com.example.aihub.controller.CoursesController - 请求获取当前教师的课程列表
+2025-06-17 02:37:31.130 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:31.131 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:31.132 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:31.137 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectList - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE deleted=0 AND (teacher_id = ?)
+2025-06-17 02:37:31.138 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectList - ==> Parameters: 2(Long)
+2025-06-17 02:37:31.141 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectList - <==      Total: 2
+2025-06-17 02:37:31.142 [http-nio-8080-exec-4] DEBUG com.example.aihub.controller.CoursesController - 获取到课程 2 条
+2025-06-17 02:37:32.095 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:32.096 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:32.100 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:32.111 [http-nio-8080-exec-5] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:37:32.113 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:32.114 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:32.116 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:32.117 [http-nio-8080-exec-5] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:37:43.968 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:43.968 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:43.970 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:43.975 [http-nio-8080-exec-6] INFO  com.example.aihub.controller.CoursesController - 请求解析课程，课程ID: 1
+2025-06-17 02:37:43.976 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:43.977 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:43.978 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:43.986 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:37:43.986 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 123人工智能导论', level: 1
+2025-06-17 02:37:43.986 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.986 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:37:43.987 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:37:43.988 [http-nio-8080-exec-6] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 11 ---
+2025-06-17 02:37:43.989 [http-nio-8080-exec-6] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:37:43.989 [http-nio-8080-exec-6] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:37:43.991 [http-nio-8080-exec-6] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:37:43.993 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.993 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:37:43.994 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 123人工智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:37:43.993673600(LocalDateTime), 2025-06-17T02:37:43.993673600(LocalDateTime)
+2025-06-17 02:37:43.994 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.994 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:37:43.994674400(LocalDateTime), 2025-06-17T02:37:43.994674400(LocalDateTime)
+2025-06-17 02:37:43.995 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.995 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:37:43.995676300(LocalDateTime), 2025-06-17T02:37:43.995676300(LocalDateTime)
+2025-06-17 02:37:43.995 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.996 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 4(Integer), 28(Integer), 76(Integer), 2025-06-17T02:37:43.995676300(LocalDateTime), 2025-06-17T02:37:43.995676300(LocalDateTime)
+2025-06-17 02:37:43.996 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.996 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:37:43.996674(LocalDateTime), 2025-06-17T02:37:43.996674(LocalDateTime)
+2025-06-17 02:37:43.997 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.997 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:37:43.997672800(LocalDateTime), 2025-06-17T02:37:43.997672800(LocalDateTime)
+2025-06-17 02:37:43.997 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.998 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:37:43.997672800(LocalDateTime), 2025-06-17T02:37:43.997672800(LocalDateTime)
+2025-06-17 02:37:43.999 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.999 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:37:43.999674200(LocalDateTime), 2025-06-17T02:37:43.999674200(LocalDateTime)
+2025-06-17 02:37:43.999 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:43.999 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 9(Integer), 77(Integer), 97(Integer), 2025-06-17T02:37:43.999674200(LocalDateTime), 2025-06-17T02:37:43.999674200(LocalDateTime)
+2025-06-17 02:37:44.000 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:44.000 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:37:44.000678900(LocalDateTime), 2025-06-17T02:37:44.000678900(LocalDateTime)
+2025-06-17 02:37:44.000 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:37:44.001 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:37:44.000678900(LocalDateTime), 2025-06-17T02:37:44.000678900(LocalDateTime)
+2025-06-17 02:37:44.012 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.012 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:37:44.012 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 870(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:37:43.994674400(LocalDateTime), 2025-06-17T02:37:43.994674400(LocalDateTime), 871(Long)
+2025-06-17 02:37:44.012 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.012 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 870(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:37:43.995676300(LocalDateTime), 2025-06-17T02:37:43.995676300(LocalDateTime), 872(Long)
+2025-06-17 02:37:44.013 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.013 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 873(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:37:43.996674(LocalDateTime), 2025-06-17T02:37:43.996674(LocalDateTime), 874(Long)
+2025-06-17 02:37:44.014 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.015 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 874(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:37:43.997672800(LocalDateTime), 2025-06-17T02:37:43.997672800(LocalDateTime), 875(Long)
+2025-06-17 02:37:44.015 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.016 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 874(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:37:43.997672800(LocalDateTime), 2025-06-17T02:37:43.997672800(LocalDateTime), 876(Long)
+2025-06-17 02:37:44.016 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.016 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 873(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:37:43.999674200(LocalDateTime), 2025-06-17T02:37:43.999674200(LocalDateTime), 877(Long)
+2025-06-17 02:37:44.017 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.017 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 878(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:37:44.000678900(LocalDateTime), 2025-06-17T02:37:44.000678900(LocalDateTime), 879(Long)
+2025-06-17 02:37:44.018 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.018 [http-nio-8080-exec-6] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 878(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:37:44.000678900(LocalDateTime), 2025-06-17T02:37:44.000678900(LocalDateTime), 880(Long)
+2025-06-17 02:37:44.026 [http-nio-8080-exec-6] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:37:44.026 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:37:44.027 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), baf4939d435f9955f01117d58dd862efdfb553f471797af47888726a1ff7be18(String), 2025-06-17T02:37:28.079523800(LocalDateTime), success(String), 2025-06-17T02:37:44.026858(LocalDateTime), 11(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:37:44.029 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:37:44.032 [http-nio-8080-exec-6] INFO  com.example.aihub.controller.CoursesController - 课程解析成功，课程ID: 1
+2025-06-17 02:37:57.300 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:37:57.301 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:37:57.303 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:37:57.309 [http-nio-8080-exec-8] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:37:57.310 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:37:57.310 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:37:57.314 [http-nio-8080-exec-8] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:37:57.316 [http-nio-8080-exec-8] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:39:11.356 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:11.357 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:11.361 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:11.370 [http-nio-8080-exec-9] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:39:11.370 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:11.370 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:11.374 [http-nio-8080-exec-9] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:11.375 [http-nio-8080-exec-9] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:39:16.729 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:16.729 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:16.732 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:16.741 [http-nio-8080-exec-10] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:39:16.742 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:16.742 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:16.744 [http-nio-8080-exec-10] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:16.746 [http-nio-8080-exec-10] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:39:29.239 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:29.239 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:29.241 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:29.248 [http-nio-8080-exec-1] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:39:29.248 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:29.249 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:29.250 [http-nio-8080-exec-1] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:29.252 [http-nio-8080-exec-1] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:39:32.630 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:32.630 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:32.631 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:32.638 [http-nio-8080-exec-2] INFO  com.example.aihub.controller.CoursesController - 请求更新课程Markdown内容，课程ID: 1
+2025-06-17 02:39:32.639 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:32.640 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:32.640 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:32.642 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:32.642 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:32.644 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 123人工321321321智能导论', level: 1
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.654 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:39:32.655 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:39:32.656 [http-nio-8080-exec-2] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 11 ---
+2025-06-17 02:39:32.656 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:39:32.656 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:39:32.659 [http-nio-8080-exec-2] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:39:32.660 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.660 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:39:32.665 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 123人工321321321智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:39:32.660579500(LocalDateTime), 2025-06-17T02:39:32.660579500(LocalDateTime)
+2025-06-17 02:39:32.667 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.668 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:39:32.667270100(LocalDateTime), 2025-06-17T02:39:32.667270100(LocalDateTime)
+2025-06-17 02:39:32.668 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.669 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:39:32.668280900(LocalDateTime), 2025-06-17T02:39:32.668280900(LocalDateTime)
+2025-06-17 02:39:32.669 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.670 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 4(Integer), 28(Integer), 76(Integer), 2025-06-17T02:39:32.670279200(LocalDateTime), 2025-06-17T02:39:32.670279200(LocalDateTime)
+2025-06-17 02:39:32.670 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.670 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:39:32.670809900(LocalDateTime), 2025-06-17T02:39:32.670809900(LocalDateTime)
+2025-06-17 02:39:32.671 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.671 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:39:32.671817400(LocalDateTime), 2025-06-17T02:39:32.671817400(LocalDateTime)
+2025-06-17 02:39:32.672 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.673 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:39:32.672825700(LocalDateTime), 2025-06-17T02:39:32.672825700(LocalDateTime)
+2025-06-17 02:39:32.673 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.674 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:39:32.673828600(LocalDateTime), 2025-06-17T02:39:32.673828600(LocalDateTime)
+2025-06-17 02:39:32.674 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.675 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 9(Integer), 77(Integer), 97(Integer), 2025-06-17T02:39:32.674826300(LocalDateTime), 2025-06-17T02:39:32.674826300(LocalDateTime)
+2025-06-17 02:39:32.675 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.676 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:39:32.675824600(LocalDateTime), 2025-06-17T02:39:32.675824600(LocalDateTime)
+2025-06-17 02:39:32.676 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:32.676 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:39:32.676826600(LocalDateTime), 2025-06-17T02:39:32.676826600(LocalDateTime)
+2025-06-17 02:39:32.692 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.692 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:39:32.694 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 881(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:39:32.667270100(LocalDateTime), 2025-06-17T02:39:32.667270100(LocalDateTime), 882(Long)
+2025-06-17 02:39:32.694 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.695 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 881(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:39:32.668280900(LocalDateTime), 2025-06-17T02:39:32.668280900(LocalDateTime), 883(Long)
+2025-06-17 02:39:32.695 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.696 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 884(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:39:32.670809900(LocalDateTime), 2025-06-17T02:39:32.670809900(LocalDateTime), 885(Long)
+2025-06-17 02:39:32.697 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.697 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 885(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:39:32.671817400(LocalDateTime), 2025-06-17T02:39:32.671817400(LocalDateTime), 886(Long)
+2025-06-17 02:39:32.697 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.698 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 885(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:39:32.672825700(LocalDateTime), 2025-06-17T02:39:32.672825700(LocalDateTime), 887(Long)
+2025-06-17 02:39:32.699 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.699 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 884(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:39:32.673828600(LocalDateTime), 2025-06-17T02:39:32.673828600(LocalDateTime), 888(Long)
+2025-06-17 02:39:32.699 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.700 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 889(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:39:32.675824600(LocalDateTime), 2025-06-17T02:39:32.675824600(LocalDateTime), 890(Long)
+2025-06-17 02:39:32.700 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.700 [http-nio-8080-exec-2] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 889(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:39:32.676826600(LocalDateTime), 2025-06-17T02:39:32.676826600(LocalDateTime), 891(Long)
+2025-06-17 02:39:32.710 [http-nio-8080-exec-2] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:32.711 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:39:32.711 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), f1f4b7ea9596f688fb63b823011b750ef6843993fc320e11fa6cb7d5588dfbed(String), 2025-06-17T02:39:32.645017200(LocalDateTime), success(String), 2025-06-17T02:39:32.710345300(LocalDateTime), 11(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:39:32.713 [http-nio-8080-exec-2] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:39:32.716 [http-nio-8080-exec-2] INFO  com.example.aihub.controller.CoursesController - 课程内容更新并重新解析成功，课程ID: 1
+2025-06-17 02:39:38.941 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:38.942 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:38.943 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:38.950 [http-nio-8080-exec-3] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:39:38.950 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:38.950 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:38.952 [http-nio-8080-exec-3] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:38.953 [http-nio-8080-exec-3] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:39:52.892 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:52.893 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:52.896 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:52.901 [http-nio-8080-exec-4] INFO  com.example.aihub.controller.CoursesController - 请求更新课程Markdown内容，课程ID: 1
+2025-06-17 02:39:52.902 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:39:52.903 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:39:52.904 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:39:52.904 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:39:52.905 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:39:52.906 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:39:52.913 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 123人工321321321智能导论', level: 1
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.914 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:39:52.915 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:39:52.916 [http-nio-8080-exec-4] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 11 ---
+2025-06-17 02:39:52.916 [http-nio-8080-exec-4] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:39:52.916 [http-nio-8080-exec-4] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:39:52.920 [http-nio-8080-exec-4] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:39:52.920 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.921 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:39:52.921 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 123人工321321321智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:39:52.921008700(LocalDateTime), 2025-06-17T02:39:52.921008700(LocalDateTime)
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:39:52.922009100(LocalDateTime), 2025-06-17T02:39:52.922009100(LocalDateTime)
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:39:52.922519400(LocalDateTime), 2025-06-17T02:39:52.922519400(LocalDateTime)
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.922 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 4(Integer), 28(Integer), 76(Integer), 2025-06-17T02:39:52.922519400(LocalDateTime), 2025-06-17T02:39:52.922519400(LocalDateTime)
+2025-06-17 02:39:52.923 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.923 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:39:52.923532600(LocalDateTime), 2025-06-17T02:39:52.923532600(LocalDateTime)
+2025-06-17 02:39:52.923 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.924 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:39:52.923532600(LocalDateTime), 2025-06-17T02:39:52.923532600(LocalDateTime)
+2025-06-17 02:39:52.924 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.924 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:39:52.924529300(LocalDateTime), 2025-06-17T02:39:52.924529300(LocalDateTime)
+2025-06-17 02:39:52.924 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.925 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:39:52.924529300(LocalDateTime), 2025-06-17T02:39:52.924529300(LocalDateTime)
+2025-06-17 02:39:52.925 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.925 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 9(Integer), 77(Integer), 97(Integer), 2025-06-17T02:39:52.925531900(LocalDateTime), 2025-06-17T02:39:52.925531900(LocalDateTime)
+2025-06-17 02:39:52.925 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.926 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:39:52.926529(LocalDateTime), 2025-06-17T02:39:52.926529(LocalDateTime)
+2025-06-17 02:39:52.926 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:39:52.926 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:39:52.926529(LocalDateTime), 2025-06-17T02:39:52.926529(LocalDateTime)
+2025-06-17 02:39:52.939 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.939 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:39:52.940 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 892(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:39:52.922009100(LocalDateTime), 2025-06-17T02:39:52.922009100(LocalDateTime), 893(Long)
+2025-06-17 02:39:52.940 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.940 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 892(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:39:52.922519400(LocalDateTime), 2025-06-17T02:39:52.922519400(LocalDateTime), 894(Long)
+2025-06-17 02:39:52.940 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.941 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 895(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:39:52.923532600(LocalDateTime), 2025-06-17T02:39:52.923532600(LocalDateTime), 896(Long)
+2025-06-17 02:39:52.941 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.941 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 896(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:39:52.923532600(LocalDateTime), 2025-06-17T02:39:52.923532600(LocalDateTime), 897(Long)
+2025-06-17 02:39:52.941 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.942 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 896(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:39:52.924529300(LocalDateTime), 2025-06-17T02:39:52.924529300(LocalDateTime), 898(Long)
+2025-06-17 02:39:52.942 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.942 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 895(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:39:52.924529300(LocalDateTime), 2025-06-17T02:39:52.924529300(LocalDateTime), 899(Long)
+2025-06-17 02:39:52.943 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.943 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 900(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:39:52.926529(LocalDateTime), 2025-06-17T02:39:52.926529(LocalDateTime), 901(Long)
+2025-06-17 02:39:52.943 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.944 [http-nio-8080-exec-4] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 900(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:39:52.926529(LocalDateTime), 2025-06-17T02:39:52.926529(LocalDateTime), 902(Long)
+2025-06-17 02:39:52.950 [http-nio-8080-exec-4] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:39:52.951 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:39:52.951 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), f1f4b7ea9596f688fb63b823011b750ef6843993fc320e11fa6cb7d5588dfbed(String), 2025-06-17T02:39:52.906632100(LocalDateTime), success(String), 2025-06-17T02:39:52.950235800(LocalDateTime), 11(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:39:52.953 [http-nio-8080-exec-4] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:39:52.955 [http-nio-8080-exec-4] INFO  com.example.aihub.controller.CoursesController - 课程内容更新并重新解析成功，课程ID: 1
+2025-06-17 02:40:39.879 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:40:39.879 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:40:39.881 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:40:39.886 [http-nio-8080-exec-5] INFO  com.example.aihub.controller.CoursesController - 请求更新课程Markdown内容，课程ID: 1
+2025-06-17 02:40:39.888 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:40:39.889 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:40:39.891 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:40:39.892 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:40:39.893 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:40:39.894 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:40:39.901 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:40:39.901 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 22222人工321321321智能导论', level: 1
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:40:39.902 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:40:39.903 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:40:39.904 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 11 ---
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:40:39.905 [http-nio-8080-exec-5] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:40:39.908 [http-nio-8080-exec-5] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:40:39.909 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.909 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:40:39.909 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 22222人工321321321智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:40:39.909950900(LocalDateTime), 2025-06-17T02:40:39.909950900(LocalDateTime)
+2025-06-17 02:40:39.910 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.910 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:40:39.910960600(LocalDateTime), 2025-06-17T02:40:39.910960600(LocalDateTime)
+2025-06-17 02:40:39.911 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.911 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:40:39.911958900(LocalDateTime), 2025-06-17T02:40:39.911958900(LocalDateTime)
+2025-06-17 02:40:39.911 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.912 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 4(Integer), 28(Integer), 76(Integer), 2025-06-17T02:40:39.911958900(LocalDateTime), 2025-06-17T02:40:39.911958900(LocalDateTime)
+2025-06-17 02:40:39.912 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.912 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:40:39.912964500(LocalDateTime), 2025-06-17T02:40:39.912964500(LocalDateTime)
+2025-06-17 02:40:39.913 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.913 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:40:39.913959900(LocalDateTime), 2025-06-17T02:40:39.913959900(LocalDateTime)
+2025-06-17 02:40:39.914 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.914 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:40:39.914959100(LocalDateTime), 2025-06-17T02:40:39.914959100(LocalDateTime)
+2025-06-17 02:40:39.914 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.915 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:40:39.914959100(LocalDateTime), 2025-06-17T02:40:39.914959100(LocalDateTime)
+2025-06-17 02:40:39.915 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.915 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 9(Integer), 77(Integer), 97(Integer), 2025-06-17T02:40:39.915961900(LocalDateTime), 2025-06-17T02:40:39.915961900(LocalDateTime)
+2025-06-17 02:40:39.916 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.916 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:40:39.916964700(LocalDateTime), 2025-06-17T02:40:39.916964700(LocalDateTime)
+2025-06-17 02:40:39.916 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:40:39.916 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:40:39.916964700(LocalDateTime), 2025-06-17T02:40:39.916964700(LocalDateTime)
+2025-06-17 02:40:39.933 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.934 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:40:39.934 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 903(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:40:39.910960600(LocalDateTime), 2025-06-17T02:40:39.910960600(LocalDateTime), 904(Long)
+2025-06-17 02:40:39.935 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.935 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 903(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 3(Integer), 15(Integer), 27(Integer), 2025-06-17T02:40:39.911958900(LocalDateTime), 2025-06-17T02:40:39.911958900(LocalDateTime), 905(Long)
+2025-06-17 02:40:39.935 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.936 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 906(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 5(Integer), 32(Integer), 52(Integer), 2025-06-17T02:40:39.912964500(LocalDateTime), 2025-06-17T02:40:39.912964500(LocalDateTime), 907(Long)
+2025-06-17 02:40:39.936 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.936 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 907(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 6(Integer), 36(Integer), 44(Integer), 2025-06-17T02:40:39.913959900(LocalDateTime), 2025-06-17T02:40:39.913959900(LocalDateTime), 908(Long)
+2025-06-17 02:40:39.937 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.937 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 907(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 7(Integer), 45(Integer), 52(Integer), 2025-06-17T02:40:39.914959100(LocalDateTime), 2025-06-17T02:40:39.914959100(LocalDateTime), 909(Long)
+2025-06-17 02:40:39.937 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.938 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 906(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 8(Integer), 53(Integer), 76(Integer), 2025-06-17T02:40:39.914959100(LocalDateTime), 2025-06-17T02:40:39.914959100(LocalDateTime), 910(Long)
+2025-06-17 02:40:39.938 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.938 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 911(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 10(Integer), 81(Integer), 89(Integer), 2025-06-17T02:40:39.916964700(LocalDateTime), 2025-06-17T02:40:39.916964700(LocalDateTime), 912(Long)
+2025-06-17 02:40:39.939 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.939 [http-nio-8080-exec-5] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 911(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 11(Integer), 90(Integer), 97(Integer), 2025-06-17T02:40:39.916964700(LocalDateTime), 2025-06-17T02:40:39.916964700(LocalDateTime), 913(Long)
+2025-06-17 02:40:39.947 [http-nio-8080-exec-5] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:40:39.947 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:40:39.948 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), 83282920ac010951f628760a85d4ce3312f2354988965cbb87f688bd5f0ced4c(String), 2025-06-17T02:40:39.895198500(LocalDateTime), success(String), 2025-06-17T02:40:39.946712(LocalDateTime), 11(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:40:39.949 [http-nio-8080-exec-5] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:40:39.953 [http-nio-8080-exec-5] INFO  com.example.aihub.controller.CoursesController - 课程内容更新并重新解析成功，课程ID: 1
+2025-06-17 02:41:50.793 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:41:50.793 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:41:50.796 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:41:50.801 [http-nio-8080-exec-6] INFO  com.example.aihub.controller.CoursesController - 请求获取课程Markdown内容，课程ID: 1
+2025-06-17 02:41:50.801 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:41:50.801 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:41:50.808 [http-nio-8080-exec-6] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:41:50.809 [http-nio-8080-exec-6] DEBUG com.example.aihub.controller.CoursesController - 成功获取到课程内容，课程ID: 1
+2025-06-17 02:42:34.373 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:42:34.373 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:42:34.374 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:42:34.380 [http-nio-8080-exec-7] INFO  com.example.aihub.controller.CoursesController - 请求更新课程Markdown内容，课程ID: 1
+2025-06-17 02:42:34.381 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==>  Preparing: SELECT id,title,description,teacher_id,file_path,file_hash,file_updated_at,parse_status,parse_error,parsed_at,chapter_count,create_time,update_time,deleted FROM courses WHERE id=? AND deleted=0
+2025-06-17 02:42:34.381 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - ==> Parameters: 1(Integer)
+2025-06-17 02:42:34.383 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.selectById - <==      Total: 1
+2025-06-17 02:42:34.383 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==>  Preparing: SELECT id,username,email,user_code,password_hash,full_name,avatar,role,create_time,update_time,deleted FROM users WHERE deleted=0 AND (username = ?)
+2025-06-17 02:42:34.383 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - ==> Parameters: testuser(String)
+2025-06-17 02:42:34.384 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.UsersMapper.selectList - <==      Total: 1
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing START] courseId: 1 ---
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第1章 22222人工321321321智能导论', level: 1
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [0, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1
+2025-06-17 02:42:34.391 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '什么是人工智能？', level: 2
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '程凯', level: 3
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 1, 1, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.1.1
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: 'AI发展简史', level: 2
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 1, 1, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [1, 2, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 1.2
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第2章 核心技术概念', level: 1
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [1, 2, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '机器学习基础', level: 2
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '监督学习', level: 3
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 1, 0, 0, 0]
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.1
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '无监督学习', level: 3
+2025-06-17 02:42:34.392 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 1, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 1, 2, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.1.2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '神经网络与深度学习', level: 2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 1, 2, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [2, 2, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 2.2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '第3章 主要应用领域', level: 1
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [2, 2, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '自然语言处理 (NLP)', level: 2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 0, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.1
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Found heading: '3.2 计算机视觉 (CV)', level: 2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state BEFORE: [3, 1, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - Counters state AFTER:  [3, 2, 0, 0, 0, 0]
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - ==> Generated chapterKey: 3.2
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG com.example.aihub.service.impl.CoursesServiceImpl - --- [Chapter Parsing END] Total chapters found: 12 ---
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==>  Preparing: DELETE FROM chapters WHERE course_id = ?
+2025-06-17 02:42:34.393 [http-nio-8080-exec-7] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - ==> Parameters: 1(Integer)
+2025-06-17 02:42:34.395 [http-nio-8080-exec-7] DEBUG c.e.a.m.ChaptersMapper.physicalDeleteByCourseId - <==    Updates: 11
+2025-06-17 02:42:34.396 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.396 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==>  Preparing: INSERT INTO chapters ( course_id, chapter_key, level, title, content, sort_order, line_start, line_end, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-06-17 02:42:34.396 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1(String), 1(Integer), 第1章 22222人工321321321智能导论(String), 欢迎来到人工智能的世界！本章将为您揭开AI的神秘面纱，介绍其基本定义、发展历史以及核心理念。学习本章后，您将对AI有一个宏观的认识。
+##  什么是人工智能？人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+### 程凯##  AI发展简史从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 1(Integer), 0(Integer), 27(Integer), 2025-06-17T02:42:34.396747500(LocalDateTime), 2025-06-17T02:42:34.396747500(LocalDateTime)
+2025-06-17 02:42:34.398 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.398 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+### 程凯(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:42:34.398255700(LocalDateTime), 2025-06-17T02:42:34.398255700(LocalDateTime)
+2025-06-17 02:42:34.398 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.398 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.1.1(String), 3(Integer), 程凯(String), (String), 3(Integer), 13(Integer), 14(Integer), 2025-06-17T02:42:34.398393300(LocalDateTime), 2025-06-17T02:42:34.398393300(LocalDateTime)
+2025-06-17 02:42:34.399 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.399 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 4(Integer), 15(Integer), 27(Integer), 2025-06-17T02:42:34.399265100(LocalDateTime), 2025-06-17T02:42:34.399265100(LocalDateTime)
+2025-06-17 02:42:34.399 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.400 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2(String), 1(Integer), 第2章 核心技术概念(String), 本章将深入探讨构成现代AI的两大支柱：机器学习和神经网络。这是所有AI应用的技术基石。
+## 机器学习基础机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。
+##  神经网络与深度学习神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 5(Integer), 28(Integer), 76(Integer), 2025-06-17T02:42:34.399265100(LocalDateTime), 2025-06-17T02:42:34.399265100(LocalDateTime)
+2025-06-17 02:42:34.400 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.400 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 6(Integer), 32(Integer), 52(Integer), 2025-06-17T02:42:34.400265100(LocalDateTime), 2025-06-17T02:42:34.400265100(LocalDateTime)
+2025-06-17 02:42:34.400 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.401 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 7(Integer), 36(Integer), 44(Integer), 2025-06-17T02:42:34.401263(LocalDateTime), 2025-06-17T02:42:34.401263(LocalDateTime)
+2025-06-17 02:42:34.401 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.401 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 8(Integer), 45(Integer), 52(Integer), 2025-06-17T02:42:34.401263(LocalDateTime), 2025-06-17T02:42:34.401263(LocalDateTime)
+2025-06-17 02:42:34.402 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.402 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 9(Integer), 53(Integer), 76(Integer), 2025-06-17T02:42:34.402262800(LocalDateTime), 2025-06-17T02:42:34.402262800(LocalDateTime)
+2025-06-17 02:42:34.402 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.402 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3(String), 1(Integer), 第3章 主要应用领域(String), 了解了理论之后，让我们看看AI在现实世界中的一些强大应用，这些技术正在深刻地改变我们的生活。
+## 自然语言处理 (NLP)自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。
+## 3.2 计算机视觉 (CV)计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 10(Integer), 77(Integer), 97(Integer), 2025-06-17T02:42:34.402262800(LocalDateTime), 2025-06-17T02:42:34.402262800(LocalDateTime)
+2025-06-17 02:42:34.403 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.403 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 11(Integer), 81(Integer), 89(Integer), 2025-06-17T02:42:34.403262100(LocalDateTime), 2025-06-17T02:42:34.403262100(LocalDateTime)
+2025-06-17 02:42:34.403 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充创建时间和更新时间
+2025-06-17 02:42:34.403 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.ChaptersMapper.insert - ==> Parameters: 1(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 12(Integer), 90(Integer), 97(Integer), 2025-06-17T02:42:34.403262100(LocalDateTime), 2025-06-17T02:42:34.403262100(LocalDateTime)
+2025-06-17 02:42:34.414 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.414 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==>  Preparing: UPDATE chapters SET course_id=?, parent_id=?, chapter_key=?, level=?, title=?, content=?, sort_order=?, line_start=?, line_end=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:42:34.414 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 914(Integer), 1.1(String), 2(Integer), 什么是人工智能？(String), 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+本节将探讨以下几个核心问题：
+- 智能的定义是什么？
+- AI的主要流派有哪些？（例如：符号主义、连接主义、行为主义）
+- 强人工智能与弱人工智能的本质区别是什么？
+**关键术语**: `图灵测试`, `机器学习`, `深度学习`
+### 程凯(String), 2(Integer), 4(Integer), 14(Integer), 2025-06-17T02:42:34.398255700(LocalDateTime), 2025-06-17T02:42:34.398255700(LocalDateTime), 915(Long)
+2025-06-17 02:42:34.415 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.415 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 915(Integer), 1.1.1(String), 3(Integer), 程凯(String), (String), 3(Integer), 13(Integer), 14(Integer), 2025-06-17T02:42:34.398393300(LocalDateTime), 2025-06-17T02:42:34.398393300(LocalDateTime), 916(Long)
+2025-06-17 02:42:34.415 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 914(Integer), 1.2(String), 2(Integer), AI发展简史(String), 从艾伦·图灵的开创性工作到今天的深度学习革命，AI的发展经历了多次跌宕起伏的浪潮。了解这段历史有助于我们更好地理解当下的技术。
+- **诞生期 (1956)**: 在达特茅斯会议上，\"人工智能\"被正式命名。
+- **第一个黄金时代 (50年代末-70年代初)**: 主要集中在逻辑推理和搜索算法，解决了许多逻辑难题。
+- **第一次AI寒冬 (70年代中-80年代初)**: 由于计算能力和数据量的瓶颈，许多宏伟的项目未能实现，导致资金撤退。
+- **繁荣期 (80年代)**: 专家系统的兴起，AI在特定领域展现出商业价值。
+- **第二次AI寒冬 (80年代末-90年代初)**: 专家系统构建和维护成本高昂，再次遇到瓶颈。
+- **现代AI (90年代至今)**: 随着互联网的普及（大数据）、计算能力的飞跃（GPU）和算法的成熟，机器学习和深度学习引领了新一轮的AI革命。
+---(String), 4(Integer), 15(Integer), 27(Integer), 2025-06-17T02:42:34.399265100(LocalDateTime), 2025-06-17T02:42:34.399265100(LocalDateTime), 917(Long)
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 918(Integer), 2.1(String), 2(Integer), 机器学习基础(String), 机器学习是AI的一个核心分支，它使计算机能够从数据中“学习”而无需进行显式编程。我们将介绍最主流的学习范式。
+### 监督学习在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。
+### 无监督学习与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 6(Integer), 32(Integer), 52(Integer), 2025-06-17T02:42:34.400265100(LocalDateTime), 2025-06-17T02:42:34.400265100(LocalDateTime), 919(Long)
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 919(Integer), 2.1.1(String), 3(Integer), 监督学习(String), 在监督学习中，我们为算法提供一组带有“正确答案”的标记数据（数据集），然后让算法从中学习一个可以预测新数据答案的模型。
+常见的监督学习算法包括：
+1.  **线性回归 (Linear Regression)**: 用于预测连续值，如房价。
+2.  **逻辑回归 (Logistic Regression)**: 用于分类问题，如判断邮件是否为垃圾邮件。
+3.  **支持向量机 (Support Vector Machine, SVM)**: 强大的分类器。(String), 7(Integer), 36(Integer), 44(Integer), 2025-06-17T02:42:34.401263(LocalDateTime), 2025-06-17T02:42:34.401263(LocalDateTime), 920(Long)
+2025-06-17 02:42:34.416 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.418 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 919(Integer), 2.1.2(String), 3(Integer), 无监督学习(String), 与监督学习不同，无监督学习处理的是没有标记的数据，算法需要自己发现数据中的内在结构和模式。
+主要应用场景：
+- **聚类**: 将相似的数据点分组。例如，通过 `K-Means` 算法对用户进行分群。
+- **降维**: 在保留重要信息的同时减少数据特征的数量。例如，使用 `主成分分析 (PCA)` 进行数据可视化。(String), 8(Integer), 45(Integer), 52(Integer), 2025-06-17T02:42:34.401263(LocalDateTime), 2025-06-17T02:42:34.401263(LocalDateTime), 921(Long)
+2025-06-17 02:42:34.418 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.418 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 918(Integer), 2.2(String), 2(Integer), 神经网络与深度学习(String), 神经网络受到人脑神经元连接方式的启发，是深度学习的基础。一个深度学习模型通常由多个神经网络层堆叠而成。
+下面是一个简单的代码示例，展示了如何用Python的Keras库构建一个基础的神经网络层：
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+# 定义一个简单的序列模型
+model = keras.Sequential([
+    # 添加一个全连接层，有128个神经元，激活函数为ReLU
+    keras.layers.Dense(128, activation='relu'),
+    # 添加一个输出层，有10个神经元（对应10个分类），激活函数为Softmax
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# 打印模型结构
+print(\"模型结构摘要:\")
+model.summary()
+```---(String), 9(Integer), 53(Integer), 76(Integer), 2025-06-17T02:42:34.402262800(LocalDateTime), 2025-06-17T02:42:34.402262800(LocalDateTime), 922(Long)
+2025-06-17 02:42:34.418 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.419 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 923(Integer), 3.1(String), 2(Integer), 自然语言处理 (NLP)(String), 自然语言处理（NLP）是AI中专注于使计算机能够理解、解释和生成人类语言的领域。
+主要应用实例：
+- **机器翻译**: 例如谷歌翻译，能够实现多种语言的实时互译。
+- **情感分析**: 分析社交媒体上用户评论的情感倾向（正面、负面或中性）。
+- **聊天机器人**: 各类网站和App中的智能客服。(String), 11(Integer), 81(Integer), 89(Integer), 2025-06-17T02:42:34.403262100(LocalDateTime), 2025-06-17T02:42:34.403262100(LocalDateTime), 924(Long)
+2025-06-17 02:42:34.419 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.419 [http-nio-8080-exec-7] DEBUG c.example.aihub.mapper.ChaptersMapper.updateById - ==> Parameters: 1(Integer), 923(Integer), 3.2(String), 2(Integer), 3.2 计算机视觉 (CV)(String), 计算机视觉（CV）旨在训练计算机来“看”和理解数字图像与视频。
+主要应用实例：
+- **图像识别**: 在相册中自动为照片中的人物或物体打上标签。
+- **人脸识别**: 用于手机解锁、移动支付和公共安全领域的身份验证。
+- **自动驾驶**: 车辆通过摄像头和传感器实时感知周围环境，做出驾驶决策。(String), 12(Integer), 90(Integer), 97(Integer), 2025-06-17T02:42:34.403262100(LocalDateTime), 2025-06-17T02:42:34.403262100(LocalDateTime), 925(Long)
+2025-06-17 02:42:34.426 [http-nio-8080-exec-7] DEBUG c.e.aihub.config.MyBatisPlusMetaObjectHandler - 自动填充更新时间
+2025-06-17 02:42:34.426 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==>  Preparing: UPDATE courses SET title=?, description=?, teacher_id=?, file_path=?, file_hash=?, file_updated_at=?, parse_status=?, parsed_at=?, chapter_count=?, create_time=?, update_time=? WHERE id=? AND deleted=0
+2025-06-17 02:42:34.426 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - ==> Parameters: string(String), string(String), 2(Integer), courses-md/ae62a3c5-dd69-4e8e-b569-873660d997f7.md(String), 69ce1c8a8abb0842dbffb2c19de608ab34f70eb2ebb5eee4ba5f3763a28d56cf(String), 2025-06-17T02:42:34.385714700(LocalDateTime), success(String), 2025-06-17T02:42:34.425840800(LocalDateTime), 12(Integer), 2025-06-15T23:48:02(LocalDateTime), 2025-06-15T23:48:02(LocalDateTime), 1(Long)
+2025-06-17 02:42:34.428 [http-nio-8080-exec-7] DEBUG com.example.aihub.mapper.CoursesMapper.updateById - <==    Updates: 1
+2025-06-17 02:42:34.430 [http-nio-8080-exec-7] INFO  com.example.aihub.controller.CoursesController - 课程内容更新并重新解析成功，课程ID: 1

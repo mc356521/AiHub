@@ -395,6 +395,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             throw new SecurityException("无权修改此课程");
         }
 
+        // 对前端发来的字符串进行清理，将 "\\n" 替换为真正的换行符
+        String correctedContent = content.replace("\\n", "\n");
+        // 同时，移除可能存在的多余的包围引号
+        if (correctedContent.startsWith("\"") && correctedContent.endsWith("\"") && correctedContent.length() > 1) {
+            correctedContent = correctedContent.substring(1, correctedContent.length() - 1);
+        }
+
         // 3. 写入文件
         String relativePath = course.getFilePath();
         try {
@@ -404,7 +411,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             } else {
                 filePath = Paths.get(storagePath, relativePath);
             }
-            Files.writeString(filePath.normalize(), content, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.writeString(filePath.normalize(), correctedContent, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new Exception("写入课程文件时发生错误", e);
         }
