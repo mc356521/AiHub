@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 章节解析缓存，用于快速查询和导航 服务实现类
+ * 章节解析缓存 服务实现类
  * </p>
  *
  * @author AIHub Code Generator

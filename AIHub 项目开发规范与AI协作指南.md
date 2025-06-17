@@ -29,7 +29,10 @@ http://localhost:8080/swagger-ui/index.html
     *   **类/接口 (Class/Interface)**: 大驼峰命名法 (PascalCase)，如 `UsersService`。
     *   **方法/变量 (Method/Variable)**: 小驼峰命名法 (camelCase)，如 `getUserById`。
     *   **常量 (Constant)**: 全大写，下划线分隔 (UPPER_SNAKE_CASE)，如 `MAX_LOGIN_ATTEMPTS`。
-*   **注释**: 所有公开的类和方法都必须有 Javadoc 注释，解释"为什么"而不是"是什么"。
+*   **注释**: 
+    *   **类和接口**: 所有公开的类和接口都必须有 Javadoc 注释，说明其用途和职责。
+    *   **方法**: 所有公开的方法都必须有 Javadoc 注释，清晰地描述方法的功能、参数 (`@param`)、返回值 (`@return`) 和可能抛出的异常 (`@throws`)。
+    *   **实现逻辑**: 在复杂的业务逻辑实现内部，应添加必要的行内或块注释，解释"为什么这么做"，而不是"做了什么"。
 
 ### 3. 项目架构
 
@@ -50,7 +53,10 @@ http://localhost:8080/swagger-ui/index.html
 *   **统一响应格式**: 所有Controller接口必须返回 `com.example.aihub.common.Result<T>`。
     *   成功: `Result.success(data, "操作成功")`
     *   失败: `Result.failed("错误信息")`
-*   **RESTful 风格**: 使用名词复数表示资源路径 (`/users`)，并使用正确的HTTP动词 (`GET`, `POST`, `PUT`, `DELETE`)。
+*   **RESTful 风格**: 
+    *   所有API路径不需要`/api开头` 作为前缀
+    *   使用名词复数表示资源路径 (`/users`)。
+    *   使用正确的HTTP动词 (`GET`, `POST`, `PUT`, `DELETE`) 表达操作。
 *   **API文档**: 所有Controller和公开API必须有完整的SpringDoc注解。
     *   `@Tag`: 用于Controller类。
     *   `@Operation`: 用于Controller方法。

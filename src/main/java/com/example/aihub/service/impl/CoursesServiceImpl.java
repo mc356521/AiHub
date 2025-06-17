@@ -46,11 +46,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.Stack;
 import java.io.FileNotFoundException;
+import java.nio.file.StandardOpenOption;
 
 /**
- * <p>
- * 课程基本信息和Markdown文件元数据 服务实现类
- * </p>
+ * 课程服务实现类，负责处理课程创建、解析、查询等核心业务逻辑。
  *
  * @author hahaha
  * @since 2024-07-25
@@ -124,7 +123,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
     @Override
     @Transactional
-    public void parseAndSaveChapters(Integer courseId) {
+    public void parseAndSaveChapters(Integer courseId) throws Exception {
         // 1. 获取课程信息
         Courses course = this.getById(courseId);
         if (course == null) {
@@ -139,15 +138,29 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         LocalDateTime fileUpdatedAt;
         String fileHash;
         try {
-            Path filePath = Paths.get(course.getFilePath());
-            byte[] fileBytes = Files.readAllBytes(filePath);
+            String relativePath = course.getFilePath();
+            // 兼容处理：检查数据库中存储的路径是否已包含根目录（为了兼容脏数据）
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                // 如果是 'courses-md/xxxx.md' 格式，直接使用
+                filePath = Paths.get(relativePath);
+            } else {
+                // 如果是 'xxxx.md' 格式，与根目录拼接
+                filePath = Paths.get(storagePath, relativePath);
+            }
+
+            if (!Files.exists(filePath.normalize())) {
+                throw new FileNotFoundException("课程文件不存在: " + filePath.normalize());
+            }
+
+            byte[] fileBytes = Files.readAllBytes(filePath.normalize());
             content = new String(fileBytes, StandardCharsets.UTF_8);
 
             // 获取文件最后修改时间
-            FileTime lastModifiedTime = Files.getLastModifiedTime(filePath);
+            FileTime lastModifiedTime = Files.getLastModifiedTime(filePath.normalize());
             fileUpdatedAt = LocalDateTime.ofInstant(lastModifiedTime.toInstant(), ZoneId.systemDefault());
 
-            // 计算文件内容的SHA-256哈希
+            // 计算文件内容的SHA-256哈希，用于版本比对
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedhash = digest.digest(fileBytes);
             StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
@@ -165,30 +178,33 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             throw new RuntimeException("读取或处理文件时出错", e);
         }
 
-        // 4. 解析Markdown并提取章节
+        // 4. 使用FlexMark解析Markdown并提取章节
         Parser parser = Parser.builder().build();
         Document document = parser.parse(content);
         List<Chapters> chaptersList = new ArrayList<>();
         AtomicInteger sortOrder = new AtomicInteger(0);
         
+        // 用于生成章节序号（如1, 1.1, 1.2.1）的计数器数组，索引对应标题级别(H1-H6)
         int[] levelCounters = new int[6];
         log.debug("--- [Chapter Parsing START] courseId: {} ---", courseId);
 
+        // 用于暂存章节与其父章节对应关系的映射
         Map<String, String> parentLinkMap = new HashMap<>();
 
         NodeVisitor visitor = new NodeVisitor(
             new VisitHandler<>(Heading.class, heading -> {
-                int level = heading.getLevel();
+                int level = heading.getLevel(); // 获取标题级别 (1-6)
                 log.debug("Found heading: '{}', level: {}", heading.getText().toString(), level);
                 log.debug("Counters state BEFORE: {}", Arrays.toString(levelCounters));
 
+                // 核心算法：增加当前级别的计数器，并重置所有更深级别的计数器
                 levelCounters[level - 1]++;
-
                 for (int i = level; i < levelCounters.length; i++) {
                     levelCounters[i] = 0;
                 }
                 log.debug("Counters state AFTER:  {}", Arrays.toString(levelCounters));
 
+                // 根据计数器状态构建章节的唯一键 (e.g., "1.2.1")
                 StringBuilder keyBuilder = new StringBuilder();
                 for (int i = 0; i < level; i++) {
                     keyBuilder.append(levelCounters[i]);
@@ -199,6 +215,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
                 String chapterKey = keyBuilder.toString();
                 log.debug("==> Generated chapterKey: {}", chapterKey);
 
+                // 生成父章节的键 (e.g., "1.2" for "1.2.1")
                 String parentKey = null;
                 if (level > 1) {
                     StringBuilder parentKeyBuilder = new StringBuilder();
@@ -213,6 +230,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
                 parentLinkMap.put(chapterKey, parentKey);
                 
+                // 提取章节内容：从当前标题到下一个同级或更高级别标题之间的所有内容
                 StringBuilder contentBuilder = new StringBuilder();
                 Node next = heading.getNext();
                 while (next != null && !(next instanceof Heading && ((Heading) next).getLevel() <= level)) {
@@ -238,21 +256,21 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
         // 5. 存入数据库
         try {
-            // 5.1. 先物理删除旧章节
+            // 5.1. 先物理删除旧章节，确保幂等性
             chaptersService.physicalDeleteByCourseId(courseId);
             
-            // 5.2. 插入新章节（不带parentId）
+            // 5.2. 插入新章节（此时不含parentId）
             if (chaptersList.isEmpty()) {
                 updateCourseParseStatus(course, "success", "课程为空或未包含章节", 0, fileHash, fileUpdatedAt);
                 return;
             }
             chaptersService.saveBatch(chaptersList);
 
-            // 5.3. 构建 chapterKey -> id 的映射
+            // 5.3. 构建 chapterKey -> id 的映射，用于后续设置父子关系
             Map<String, Long> keyToIdMap = chaptersList.stream()
                     .collect(Collectors.toMap(Chapters::getChapterKey, Chapters::getId));
             
-            // 5.4. 设置 parentId 并准备更新
+            // 5.4. 根据之前记录的父子关系，设置parentId并准备批量更新
             List<Chapters> updateList = new ArrayList<>();
             for (Chapters chapter : chaptersList) {
                 String parentKey = parentLinkMap.get(chapter.getChapterKey());
@@ -265,12 +283,12 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
                 }
             }
 
-            // 5.5. 批量更新 parentId
+            // 5.5. 批量更新parentId
             if (!updateList.isEmpty()) {
                 chaptersService.updateBatchById(updateList);
             }
 
-            // 5.6. 更新课程解析状态
+            // 5.6. 更新课程主表的解析状态
             updateCourseParseStatus(course, "success", null, chaptersList.size(), fileHash, fileUpdatedAt);
         } catch (Exception e) {
             log.error("保存章节信息到数据库时失败, courseId: {}", courseId, e);
@@ -283,6 +301,17 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         }
     }
 
+    /**
+     * 更新课程的解析状态及相关元数据。
+     * 这是一个私有辅助方法，用于在解析过程的不同阶段更新课程记录。
+     *
+     * @param course        要更新的课程实体
+     * @param status        新的解析状态 (e.g., "success", "failed")
+     * @param errorMessage  如果失败，记录错误信息
+     * @param chapterCount  成功解析出的章节数
+     * @param fileHash      当前文件内容的哈希值
+     * @param fileUpdatedAt 当前文件的最后修改时间
+     */
     private void updateCourseParseStatus(Courses course, String status, String errorMessage, int chapterCount, String fileHash, LocalDateTime fileUpdatedAt) {
         course.setParseStatus(status);
         course.setParseError(errorMessage);
@@ -328,14 +357,66 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         }
 
         try {
-            Path filePath = Paths.get(storagePath, relativePath).normalize();
-            if (!Files.exists(filePath)) {
-                throw new FileNotFoundException("课程文件不存在: " + filePath);
+            // 兼容处理：检查数据库中存储的路径是否已包含根目录（为了兼容脏数据）
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                // 如果是 'courses-md/xxxx.md' 格式，直接使用
+                filePath = Paths.get(relativePath);
+            } else {
+                // 如果是 'xxxx.md' 格式，与根目录拼接
+                filePath = Paths.get(storagePath, relativePath);
             }
-            return Files.readString(filePath, StandardCharsets.UTF_8);
+
+            if (!Files.exists(filePath.normalize())) {
+                throw new FileNotFoundException("课程文件不存在: " + filePath.normalize());
+            }
+            return Files.readString(filePath.normalize(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            // 在实际应用中，这里应该记录日志
+            // 将IO异常包装成更通用的Exception，由全局异常处理器捕获
             throw new Exception("读取课程文件时发生错误", e);
         }
+    }
+
+    @Override
+    @Transactional
+    public void updateCourseContent(Integer courseId, String content) throws Exception {
+        // 1. 获取课程信息
+        Courses course = this.getById(courseId);
+        if (course == null) {
+            throw new RuntimeException("课程不存在");
+        }
+
+        // 2. 验证用户权限
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+
+        if (!currentUser.getId().equals(Long.valueOf(course.getTeacherId())) && !"admin".equals(currentUser.getRole())) {
+            throw new SecurityException("无权修改此课程");
+        }
+
+        // 对前端发来的字符串进行清理，将 "\\n" 替换为真正的换行符
+        String correctedContent = content.replace("\\n", "\n");
+        // 同时，移除可能存在的多余的包围引号
+        if (correctedContent.startsWith("\"") && correctedContent.endsWith("\"") && correctedContent.length() > 1) {
+            correctedContent = correctedContent.substring(1, correctedContent.length() - 1);
+        }
+
+        // 3. 写入文件
+        String relativePath = course.getFilePath();
+        try {
+            Path filePath;
+            if (relativePath.startsWith(storagePath)) {
+                filePath = Paths.get(relativePath);
+            } else {
+                filePath = Paths.get(storagePath, relativePath);
+            }
+            Files.writeString(filePath.normalize(), correctedContent, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            throw new Exception("写入课程文件时发生错误", e);
+        }
+
+        // 4. 立即重新解析章节
+        this.parseAndSaveChapters(courseId);
     }
 }

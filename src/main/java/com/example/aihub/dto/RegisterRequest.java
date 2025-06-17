@@ -10,7 +10,7 @@ public class RegisterRequest {
     @Schema(description = "用户名", required = true, example = "newuser")
     private String username;
 
-    @Schema(description = "密码", required = true, example = "password123")
+    @Schema(description = "密码", required = true, example = "cbg356521")
     private String password;
 
     @Schema(description = "电子邮箱", required = true, example = "newuser@example.com")

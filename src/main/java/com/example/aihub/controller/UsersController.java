@@ -15,21 +15,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * <p>
- * 存储所有系统用户，包括学生、教师和管理员 前端控制器
- * </p>
+ * 用户管理控制器，提供查询用户等相关功能。
  *
  * @author AIHub Code Generator
  * @since 2025-06-15
  */
 @Tag(name = "用户管理", description = "提供用户的增删改查功能")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 @Slf4j
 public class UsersController extends BaseController {
     @Autowired
     private UsersService usersService;
 
+    /**
+     * 根据用户ID获取单个用户的详细信息。
+     *
+     * @param id 要查询的用户ID
+     * @return 包含用户信息的Result响应；如果用户不存在，则返回失败。
+     */
     @Operation(summary = "根据ID获取用户", description = "根据用户ID获取单个用户详细信息")
     @GetMapping("/{id}")
     public Result<Users> getUserById(@PathVariable Long id) {
@@ -44,6 +48,11 @@ public class UsersController extends BaseController {
         }
     }
 
+    /**
+     * 获取所有用户的列表。
+     *
+     * @return 包含所有用户列表的Result响应。
+     */
     @Operation(summary = "获取所有用户列表", description = "获取所有注册用户的列表")
     @GetMapping
     public Result<List<Users>> getAllUsers() {

@@ -12,7 +12,18 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2025-06-16
  */
 public interface ChaptersService extends IService<Chapters> {
+
+    /**
+     * 根据课程ID逻辑删除所有相关的章节。
+     *
+     * @param courseId 课程ID
+     */
     void deleteByCourseId(Integer courseId);
     
+    /**
+     * 根据课程ID物理删除所有相关的章节。
+     *
+     * @param courseId 课程ID
+     */
     void physicalDeleteByCourseId(Integer courseId);
 }
