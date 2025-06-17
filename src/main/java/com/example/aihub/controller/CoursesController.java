@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Tag(name = "课程管理", description = "提供课程的增删改查及解析功能")
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/courses")
 @Slf4j
 public class CoursesController extends BaseController {
 
