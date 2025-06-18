@@ -11,8 +11,8 @@
         <result column="password_hash" property="passwordHash" />
         <result column="full_name" property="fullName" />
         <result column="role" property="role" />
-        <result column="created_at" property="createdAt" />
-        <result column="updated_at" property="updatedAt" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

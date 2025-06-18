@@ -47,6 +47,8 @@ import java.util.stream.Collectors;
 import java.util.Stack;
 import java.io.FileNotFoundException;
 import java.nio.file.StandardOpenOption;
+import com.example.aihub.common.Result;
+import com.example.aihub.dto.MyCourseResponse;
 
 /**
  * 课程服务实现类，负责处理课程创建、解析、查询等核心业务逻辑。
@@ -267,7 +269,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             chaptersService.saveBatch(chaptersList);
 
             // 5.3. 构建 chapterKey -> id 的映射，用于后续设置父子关系
-            Map<String, Long> keyToIdMap = chaptersList.stream()
+            Map<String, Integer> keyToIdMap = chaptersList.stream()
                     .collect(Collectors.toMap(Chapters::getChapterKey, Chapters::getId));
             
             // 5.4. 根据之前记录的父子关系，设置parentId并准备批量更新
@@ -275,7 +277,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             for (Chapters chapter : chaptersList) {
                 String parentKey = parentLinkMap.get(chapter.getChapterKey());
                 if (parentKey != null) {
-                    Long parentId = keyToIdMap.get(parentKey);
+                    Long parentId = Long.valueOf(keyToIdMap.get(parentKey));
                     if (parentId != null) {
                         chapter.setParentId(parentId.intValue());
                         updateList.add(chapter);
@@ -418,5 +420,14 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
         // 4. 立即重新解析章节
         this.parseAndSaveChapters(courseId);
+    }
+
+    @Override
+    public List<MyCourseResponse> getStudentCourses(Integer studentId) {
+        return baseMapper.findCoursesByStudentId(studentId);
+    }
+
+    private String getMarkdownFilePath(Courses course) {
+        return Paths.get(storagePath, course.getFilePath()).toString();
     }
 }

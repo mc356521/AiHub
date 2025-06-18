@@ -15,8 +15,8 @@
         <result column="parse_status" property="parseStatus" />
         <result column="parsed_at" property="parsedAt" />
         <result column="chapter_count" property="chapterCount" />
-        <result column="created_at" property="createdAt" />
-        <result column="updated_at" property="updatedAt" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -25,5 +25,42 @@
         deleted,
         title, description, teacher_id, file_path, file_hash, file_updated_at, parse_status, parsed_at, chapter_count, created_at, updated_at
     </sql>
+
+    <resultMap id="MyCourseResponseMap" type="com.example.aihub.dto.MyCourseResponse">
+        <result property="courseId" column="course_id"/>
+        <result property="courseTitle" column="course_title"/>
+        <result property="courseDescription" column="course_description"/>
+        <result property="teacherName" column="teacher_name"/>
+        <result property="teacherAvatar" column="teacher_avatar"/>
+        <result property="classStatus" column="class_status"/>
+        <result property="classId" column="class_id"/>
+        <result property="className" column="class_name"/>
+    </resultMap>
+
+    <select id="findCoursesByStudentId" resultMap="MyCourseResponseMap">
+        SELECT
+            c.id AS course_id,
+            c.title AS course_title,
+            c.description AS course_description,
+            u.full_name AS teacher_name,
+            u.avatar AS teacher_avatar,
+            cl.status AS class_status,
+            cl.id AS class_id,
+            cl.name AS class_name
+        FROM
+            class_members cm
+        JOIN
+            classes cl ON cm.class_id = cl.id
+        JOIN
+            courses c ON cl.course_id = c.id
+        JOIN
+            users u ON cl.teacher_id = u.id
+        WHERE
+            cm.student_id = #{studentId}
+            AND cm.deleted = 0
+            AND cl.deleted = 0
+            AND c.deleted = 0
+            AND u.deleted = 0
+    </select>
 
 </mapper>

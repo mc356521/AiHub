@@ -3,6 +3,7 @@ package com.example.aihub.service;
 import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Courses;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.aihub.dto.MyCourseResponse;
 
 import java.util.List;
 
@@ -48,4 +49,6 @@ public interface CoursesService extends IService<Courses> {
     String getCourseMarkdownContent(Integer courseId) throws Exception;
 
     void updateCourseContent(Integer courseId, String content) throws Exception;
+
+    List<MyCourseResponse> getStudentCourses(Integer studentId);
 }

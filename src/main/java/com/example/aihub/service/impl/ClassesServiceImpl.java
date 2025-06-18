@@ -6,6 +6,7 @@ import com.example.aihub.dto.ClassesRequest;
 import com.example.aihub.entity.ClassesEntity;
 import com.example.aihub.entity.Users;
 import com.example.aihub.mapper.ClassesMapper;
+import com.example.aihub.mapper.ClassMembersMapper;
 import com.example.aihub.service.ClassesService;
 import com.example.aihub.service.CoursesService;
 import com.example.aihub.service.UsersService;
@@ -35,6 +36,9 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
 
     @Autowired
     private ClassesMapper classesMapper;
+
+    @Autowired
+    private ClassMembersMapper classMembersMapper;
 
     /**
      * 新增班级
@@ -84,7 +88,51 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
     }
 
     @Override
+    public List<ClassesEntity> findClassesByTeacherAndStatus(Long teacherId, String status) {
+        QueryWrapper<ClassesEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id", teacherId);
+        wrapper.eq("status", status);
+        return classesMapper.selectList(wrapper);
+    }
+
+    @Override
     public boolean deleteClasses(Integer classesId) {
         return false;
+    }
+
+    @Override
+    public void joinClassByCode(Integer studentId, String classCode) {
+        // 1. 根据口令查找班级
+        QueryWrapper<ClassesEntity> classWrapper = new QueryWrapper<>();
+        classWrapper.eq("class_code", classCode);
+        ClassesEntity targetClass = classesMapper.selectOne(classWrapper);
+
+        if (targetClass == null) {
+            throw new RuntimeException("无效的班级口令");
+        }
+
+        // 2. 检查班级状态
+        if (!("pending".equals(targetClass.getStatus()) || "active".equals(targetClass.getStatus()))) {
+            throw new RuntimeException("该班级已结束或已归档，无法加入");
+        }
+
+        // 3. 检查用户是否为该班级教师
+        if (studentId.equals(targetClass.getTeacherId())) {
+            throw new RuntimeException("教师不能加入自己创建的班级");
+        }
+
+        // 4. 检查用户是否已在班级中
+        QueryWrapper<com.example.aihub.entity.ClassMembers> memberWrapper = new QueryWrapper<>();
+        memberWrapper.eq("class_id", targetClass.getId());
+        memberWrapper.eq("student_id", studentId);
+        if (classMembersMapper.selectCount(memberWrapper) > 0) {
+            throw new RuntimeException("您已经在此班级中");
+        }
+
+        // 5. 添加成员
+        com.example.aihub.entity.ClassMembers newMember = new com.example.aihub.entity.ClassMembers();
+        newMember.setStudentId(studentId);
+        newMember.setClassId(targetClass.getId());
+        classMembersMapper.insert(newMember);
     }
 }

@@ -10,7 +10,6 @@
         <result column="deleted" property="deleted" />
         <result column="course_id" property="courseId" />
         <result column="chapter_key" property="chapterKey" />
-        <result column="parent_key" property="parentKey" />
         <result column="level" property="level" />
         <result column="title" property="title" />
         <result column="content" property="content" />

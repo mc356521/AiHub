@@ -41,9 +41,26 @@ public interface ClassesService extends IService<ClassesEntity> {
 
 
     /**
+      * 根据教师ID和班级状态查询班级列表。
+      *
+      * @param teacherId 教师ID
+      * @param status    班级状态
+      * @return 符合条件的班级列表
+      */
+    List<ClassesEntity> findClassesByTeacherAndStatus(Long teacherId, String status);
+
+
+    /**
      * 删除指定的班级
      * @param classesId 班级id
      */
     boolean deleteClasses(Integer classesId);
 
+    /**
+     * 学生通过班级口令加入班级。
+     *
+     * @param studentId  学生ID
+     * @param classCode 班级口令
+     */
+    void joinClassByCode(Integer studentId, String classCode);
 }

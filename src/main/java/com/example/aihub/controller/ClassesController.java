@@ -2,6 +2,7 @@ package com.example.aihub.controller;
 
 import com.example.aihub.common.Result;
 import com.example.aihub.dto.ClassesRequest;
+import com.example.aihub.dto.JoinClassRequest;
 import com.example.aihub.entity.ClassesEntity;
 import com.example.aihub.entity.Users;
 import com.example.aihub.service.ClassesService;
@@ -110,6 +111,27 @@ public class ClassesController extends BaseController {
         return Result.success(allClasses, "获取所有班级成功");
     }
 
+    @PreAuthorize("hasAnyAuthority('teacher', 'admin')")
+    @Operation(summary = "获取教师指定状态的所有班级", description = "获取当前登录的教师用户下，处于指定状态的所有班级列表。状态可选值为: 'pending', 'active', 'finished', 'archived'")
+    @GetMapping("/my")
+    public Result<List<ClassesEntity>> getMyClassesByStatus(@RequestParam("status") String status) {
+        // 1. 获取当前用户信息
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            return Result.failed("用户未登录或认证信息不正确");
+        }
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            return Result.failed("无法找到当前登录用户的数据");
+        }
+
+        log.info("请求获取教师 {} 的状态为 {} 的班级列表", currentUser.getId(), status);
+        List<ClassesEntity> classes = classesService.findClassesByTeacherAndStatus(Long.valueOf(currentUser.getId()), status);
+        log.debug("获取到班级 {} 条", classes.size());
+        return Result.success(classes, "获取教师班级列表成功");
+    }
+
 
     @Operation(summary = "根据ID获取班级信息", description = "根据提供的唯一ID获取单个班级的详细信息。")
     @GetMapping("/{id}")
@@ -134,6 +156,34 @@ public class ClassesController extends BaseController {
             return Result.success("更新成功");
         } else {
             return Result.failed("更新失败，请检查参数或班级是否存在");
+        }
+    }
+
+    @Operation(summary = "通过班级口令加入班级", description = "学生用户通过提供班级口令来加入一个班级。")
+    @PostMapping("/join")
+    @PreAuthorize("isAuthenticated()")
+    public Result<?> joinClassByCode(@RequestBody JoinClassRequest request) {
+        // 1. 获取当前用户信息
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            return Result.failed("用户未登录或认证信息不正确");
+        }
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            return Result.failed("无法找到当前登录用户的数据");
+        }
+
+        try {
+            log.info("用户 {} 尝试使用口令 {} 加入班级", username, request.getClassCode());
+            // 此处存在ID类型转换，与项目中其他部分保持一致
+            Integer studentId = Integer.parseInt(String.valueOf(currentUser.getId()));
+            classesService.joinClassByCode(studentId, request.getClassCode());
+            log.info("用户 {} 成功加入班级", username);
+            return Result.success(null, "成功加入班级");
+        } catch (RuntimeException e) {
+            log.warn("用户 {} 加入班级失败: {}", username, e.getMessage());
+            return Result.failed(e.getMessage());
         }
     }
 }

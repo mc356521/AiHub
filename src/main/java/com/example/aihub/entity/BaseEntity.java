@@ -11,34 +11,21 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 基础实体类
+ * 实体类基类，包含通用字段
  */
 @Data
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    /**
-     * ID
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
-
-    /**
-     * 创建时间
-     */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    /**
-     * 更新时间
-     */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-    /**
-     * 是否删除
-     */
     @TableLogic
-    private Integer deleted;
+    @TableField(fill = FieldFill.INSERT)
+    private Boolean deleted;
 } 

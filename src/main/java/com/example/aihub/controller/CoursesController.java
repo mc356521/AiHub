@@ -2,13 +2,18 @@ package com.example.aihub.controller;
 
 import com.example.aihub.common.Result;
 import com.example.aihub.dto.CreateCourseRequest;
+import com.example.aihub.dto.MyCourseResponse;
 import com.example.aihub.entity.Courses;
+import com.example.aihub.entity.Users;
 import com.example.aihub.service.CoursesService;
+import com.example.aihub.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +32,9 @@ public class CoursesController extends BaseController {
 
     @Autowired
     private CoursesService coursesService;
+
+    @Autowired
+    private UsersService usersService;
 
     /**
      * 创建一个新课程。
@@ -85,6 +93,56 @@ public class CoursesController extends BaseController {
         List<Courses> courses = coursesService.getMyCourses();
         log.debug("获取到课程 {} 条", courses.size());
         return Result.success(courses, "获取我的课程列表成功");
+    }
+
+    /**
+     * 获取当前登录的学生所加入的所有课程列表。
+     * 此接口需要 'student' 权限。
+     *
+     * @return 包含课程列表的Result响应
+     */
+    @Operation(summary = "获取当前学生的课程列表", description = "获取当前登录的学生用户所加入的所有班级对应的课程列表。")
+    @GetMapping("/my-student")
+    @PreAuthorize("hasAuthority('student')")
+    public Result<List<MyCourseResponse>> getMyStudentCourses() {
+        log.info("请求获取当前学生的课程列表");
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            return Result.failed("用户未登录或认证信息不正确");
+        }
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            return Result.failed("无法找到当前登录用户的数据");
+        }
+
+        Integer studentId = Integer.parseInt(String.valueOf(currentUser.getId()));
+
+        List<MyCourseResponse> courses = coursesService.getStudentCourses(studentId);
+        log.debug("获取到学生的课程 {} 条", courses.size());
+        return Result.success(courses, "获取学生课程列表成功");
+    }
+
+    /**
+     * 根据课程ID获取课程基本信息。
+     * 此接口需要用户已认证。
+     *
+     * @param courseId 课程ID
+     * @return 包含课程基本信息的Result响应
+     */
+    @Operation(summary = "获取课程基本信息", description = "根据课程ID获取课程的基本信息。任何认证过的用户都可以访问。")
+    @GetMapping("/{courseId}")
+    @PreAuthorize("isAuthenticated()")
+    public Result<Courses> getCourseById(@PathVariable Integer courseId) {
+        log.info("请求获取课程基本信息，课程ID: {}", courseId);
+        Courses course = coursesService.getById(courseId);
+        if (course == null) {
+            log.warn("尝试获取一个不存在的课程，ID: {}", courseId);
+            return Result.failed("课程不存在");
+        }
+        log.info("成功获取到课程基本信息，课程ID: {}", courseId);
+        return Result.success(course, "获取课程基本信息成功");
     }
 
     /**
