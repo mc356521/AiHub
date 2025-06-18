@@ -38,7 +38,7 @@ public class ClassesEntity {
     private Integer courseId;
 
     @Schema(description = "外键, 关联到semesters表的学期ID")
-    private String semesterId;
+    private Integer semesterId;
 
     @Schema(description = "班级口令/邀请码, 用于学生加入班级")
     private String classCode;

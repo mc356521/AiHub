@@ -1,6 +1,8 @@
 package com.example.aihub.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.aihub.entity.BaseEntity;
 import java.time.LocalDate;
@@ -21,11 +23,11 @@ import lombok.Setter;
 @TableName("semesters")
 @Schema(name = "Semesters", description = "统一管理所有学期信息")
 public class Semesters {
-
+    @TableId(type = IdType.AUTO)
+    private Integer id;
     @Schema(description = "学期名称, 用于显示 (如: 2024-2025学年第一学期)")
     @TableField("name")
     private String name;
-
     @Schema(description = "学期开始日期")
     @TableField("start_date")
     private LocalDate startDate;

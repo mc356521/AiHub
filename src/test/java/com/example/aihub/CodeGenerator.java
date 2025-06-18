@@ -28,7 +28,7 @@ public class CodeGenerator {
     // 配置常量
     private static final String DEFAULT_URL = "jdbc:mysql://localhost:3306/aihub?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
     private static final String DEFAULT_USERNAME = "root";
-    private static final String DEFAULT_PASSWORD = "123456";
+    private static final String DEFAULT_PASSWORD = "root";
     private static final String AUTHOR_NAME = "AIHub Code Generator";
     private static final String PACKAGE_PARENT = "com.example.aihub";
 

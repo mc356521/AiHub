@@ -70,6 +70,13 @@ http://localhost:8080/swagger-ui/index.html
             public Result<Map<String, String>> login(@RequestBody LoginRequest loginRequest) { /* ... */ }
         }
         ```
+*   **API响应行为规范**: 为确保API的健壮性和一致性，所有Controller在处理查询结果时必须遵循以下规范：
+    1.  **查询单个资源**: 当根据ID等唯一条件查询单个资源时，Controller必须对Service层返回的结果进行`null`检查。
+        *   **若结果不为`null`**: 返回 `Result.success(data)`。
+        *   **若结果为`null`**: 必须返回业务失败的`Result`对象，如 `Result.failed("资源不存在")`，**严禁**因空指针等原因导致返回500错误。
+    2.  **查询资源列表**: 当查询资源列表时，无论结果中是否包含数据，都应视为成功操作。
+        *   **若结果不为空**: 返回 `Result.success(list)`，`data`字段为包含数据的数组。
+        *   **若结果为空**: 同样返回 `Result.success(emptyList)`，`data`字段为一个空数组 `[]`。**严禁**将"列表为空"视为一种失败。
 
 ### 5. 持久层规范 (MySQL & MyBatis-Plus)
 

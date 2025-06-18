@@ -6,6 +6,7 @@ import com.example.aihub.mapper.SemestersMapper;
 import com.example.aihub.service.SemestersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.aihub.service.UsersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author AIHub Code Generator
  * @since 2025-06-17
  */
+@Slf4j
 @Service
 public class SemestersServiceImpl extends ServiceImpl<SemestersMapper, Semesters> implements SemestersService {
 
@@ -57,5 +59,11 @@ public class SemestersServiceImpl extends ServiceImpl<SemestersMapper, Semesters
         return this.list();
     }
 
-
+    @Override
+    public Semesters getSemesterById(Integer id) {
+        log.info("在Service层开始通过ID查询学期: {}", id);
+        Semesters semester = this.getById(id);
+        log.info("Service层查询结果: {}", semester);
+        return semester;
+    }
 }

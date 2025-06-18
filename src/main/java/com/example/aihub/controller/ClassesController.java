@@ -46,7 +46,7 @@ public class ClassesController extends BaseController {
 
 
     @PreAuthorize("hasAnyAuthority('teacher', 'admin')")
-    @Operation(summary = "创建新课程", description = "创建一个新的课程，并自动生成对应的Markdown文件。只有教师或管理员可以访问。")
+    @Operation(summary = "创建新班级", description = "查询教师管理得所有班级。")
     @PostMapping
     public Result<ClassesRequest> createClasses(@RequestBody ClassesRequest ClassesRequest) {
         // 1. 获取当前用户信息
@@ -106,12 +106,23 @@ public class ClassesController extends BaseController {
         if (!"teacher".equals(role) && !"admin".equals(role)) {
             throw new SecurityException("只有教师或管理员才能创建班级");
         }
-        val all = classesService.all(Integer.parseInt(String.valueOf(currentUser.getId())));
-        if (!all.isEmpty()) {
-            return Result.success(all);
-        } else {
-            return Result.failed("获取所有班级失败!");
+        List<ClassesEntity> allClasses = classesService.all(Integer.parseInt(String.valueOf(currentUser.getId())));
+        return Result.success(allClasses, "获取所有班级成功");
+    }
+
+
+    @Operation(summary = "根据ID获取班级信息", description = "根据提供的唯一ID获取单个班级的详细信息。")
+    @GetMapping("/{id}")
+    public Result<ClassesEntity> getClassById(@PathVariable Integer id) {
+        log.info("请求获取ID为 {} 的班级信息", id);
+        ClassesEntity classEntity = classesService.getById(id);
+
+        if (classEntity == null) {
+            log.warn("尝试获取一个不存在的班级，ID: {}", id);
+            return Result.failed("班级不存在");
         }
+
+        return Result.success(classEntity, "获取班级信息成功");
     }
 
 

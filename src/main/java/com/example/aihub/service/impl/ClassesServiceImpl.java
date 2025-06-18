@@ -82,4 +82,9 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
         entity.setUpdateTime(LocalDateTime.now());
         return classesMapper.updateById(entity) > 0;
     }
+
+    @Override
+    public boolean deleteClasses(Integer classesId) {
+        return false;
+    }
 }

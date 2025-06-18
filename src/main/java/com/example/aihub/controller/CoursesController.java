@@ -58,6 +58,14 @@ public class CoursesController extends BaseController {
     @PostMapping("/{courseId}/parse")
     public Result<?> parseCourse(@PathVariable Integer courseId) throws Exception {
         log.info("请求解析课程，课程ID: {}", courseId);
+
+        // 检查课程是否存在
+        Courses course = coursesService.getById(courseId);
+        if (course == null) {
+            log.warn("尝试解析一个不存在的课程，ID: {}", courseId);
+            return Result.failed("课程不存在");
+        }
+
         coursesService.parseAndSaveChapters(courseId);
         log.info("课程解析成功，课程ID: {}", courseId);
         return Result.success(null, "课程解析成功");
@@ -92,6 +100,14 @@ public class CoursesController extends BaseController {
     @PreAuthorize("isAuthenticated()")
     public Result<String> getCourseContent(@PathVariable Integer courseId) throws Exception {
         log.info("请求获取课程Markdown内容，课程ID: {}", courseId);
+
+        // 检查课程是否存在
+        Courses course = coursesService.getById(courseId);
+        if (course == null) {
+            log.warn("尝试获取一个不存在的课程内容，ID: {}", courseId);
+            return Result.failed("课程不存在");
+        }
+
         String content = coursesService.getCourseMarkdownContent(courseId);
         log.debug("成功获取到课程内容，课程ID: {}", courseId);
         return Result.success(content, "获取课程内容成功");
@@ -112,6 +128,14 @@ public class CoursesController extends BaseController {
     @PreAuthorize("hasAnyAuthority('teacher', 'admin')")
     public Result<?> updateCourseContent(@PathVariable Integer courseId, @RequestBody String content) throws Exception {
         log.info("请求更新课程Markdown内容，课程ID: {}", courseId);
+
+        // 检查课程是否存在
+        Courses course = coursesService.getById(courseId);
+        if (course == null) {
+            log.warn("尝试更新一个不存在的课程内容，ID: {}", courseId);
+            return Result.failed("课程不存在");
+        }
+
         coursesService.updateCourseContent(courseId, content);
         log.info("课程内容更新并重新解析成功，课程ID: {}", courseId);
         return Result.success(null, "课程内容更新成功");

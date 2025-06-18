@@ -23,4 +23,7 @@ public interface SemestersService extends IService<Semesters> {
     @Schema(description = "获取学期信息接口定义")
     List<Semesters> selectAllSemesters();
 
+    @Schema(description = "根据id获取学期信息")
+    Semesters getSemesterById(Integer id);
+
 }
