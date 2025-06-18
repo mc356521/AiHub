@@ -2,11 +2,14 @@ package com.example.aihub.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Chapters;
 import com.example.aihub.entity.Courses;
 import com.example.aihub.entity.Users;
 import com.example.aihub.mapper.CoursesMapper;
+import com.example.aihub.mapper.ChaptersMapper;
+import com.example.aihub.mapper.ClassMembersMapper;
 import com.example.aihub.service.ChaptersService;
 import com.example.aihub.service.CoursesService;
 import com.example.aihub.service.UsersService;
@@ -23,6 +26,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import com.example.aihub.dto.ChapterProgressDTO;
+import com.example.aihub.entity.LearningProgress;
+import com.example.aihub.service.LearningProgressService;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,20 +46,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.Stack;
 import java.io.FileNotFoundException;
 import java.nio.file.StandardOpenOption;
 import com.example.aihub.common.Result;
 import com.example.aihub.dto.MyCourseResponse;
+import com.example.aihub.util.BasicUtil;
 
 /**
  * 课程服务实现类，负责处理课程创建、解析、查询等核心业务逻辑。
@@ -68,6 +70,18 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
     @Autowired
     private ChaptersService chaptersService;
+
+    @Autowired
+    private ClassMembersMapper classMembersMapper;
+
+    @Autowired
+    private ChaptersMapper chaptersMapper;
+
+    @Autowired
+    private LearningProgressService learningProgressService;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     @Override
     @Transactional
@@ -268,18 +282,19 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
             }
             chaptersService.saveBatch(chaptersList);
 
-            // 5.3. 构建 chapterKey -> id 的映射，用于后续设置父子关系
-            Map<String, Integer> keyToIdMap = chaptersList.stream()
+            // 5.3. 从数据库重新获取已保存的章节，确保获得自动生成的ID
+            List<Chapters> savedChapters = chaptersService.list(new QueryWrapper<Chapters>().eq("course_id", courseId));
+            Map<String, Integer> keyToIdMap = savedChapters.stream()
                     .collect(Collectors.toMap(Chapters::getChapterKey, Chapters::getId));
             
             // 5.4. 根据之前记录的父子关系，设置parentId并准备批量更新
             List<Chapters> updateList = new ArrayList<>();
-            for (Chapters chapter : chaptersList) {
+            for (Chapters chapter : savedChapters) {
                 String parentKey = parentLinkMap.get(chapter.getChapterKey());
                 if (parentKey != null) {
-                    Long parentId = Long.valueOf(keyToIdMap.get(parentKey));
+                    Integer parentId = keyToIdMap.get(parentKey);
                     if (parentId != null) {
-                        chapter.setParentId(parentId.intValue());
+                        chapter.setParentId(parentId);
                         updateList.add(chapter);
                     }
                 }
@@ -393,7 +408,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         String username = ((UserDetails) principal).getUsername();
         Users currentUser = usersService.findByUsername(username);
 
-        if (!currentUser.getId().equals(Long.valueOf(course.getTeacherId())) && !"admin".equals(currentUser.getRole())) {
+        if (!currentUser.getId().equals(Long.valueOf(course.getTeacherId())) && !"teacher".equals(currentUser.getRole())) {
             throw new SecurityException("无权修改此课程");
         }
 
@@ -425,6 +440,61 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
     @Override
     public List<MyCourseResponse> getStudentCourses(Integer studentId) {
         return baseMapper.findCoursesByStudentId(studentId);
+    }
+
+    @Override
+    public List<ChapterProgressDTO> getCourseChaptersWithProgress(Integer courseId, Integer userId) {
+        // 1. 获取课程的所有章节
+        LambdaQueryWrapper<Chapters> chaptersQuery = new LambdaQueryWrapper<>();
+        chaptersQuery.eq(Chapters::getCourseId, courseId);
+        List<Chapters> allChapters = chaptersMapper.selectList(chaptersQuery);
+
+        // 2. 获取用户在该课程的学习进度
+        LambdaQueryWrapper<LearningProgress> progressQuery = new LambdaQueryWrapper<>();
+        progressQuery.eq(LearningProgress::getCourseId, courseId)
+                     .eq(LearningProgress::getUserId, userId);
+        List<LearningProgress> progresses = learningProgressService.list(progressQuery);
+        Map<String, String> chapterProgressMap = progresses.stream()
+                .collect(Collectors.toMap(LearningProgress::getChapterId, LearningProgress::getStatus));
+
+        // 3. 将章节转换为DTO并填充进度
+        List<ChapterProgressDTO> dtoList = allChapters.stream().map(chapter -> {
+            ChapterProgressDTO dto = new ChapterProgressDTO(chapter);
+            dto.setStatus(chapterProgressMap.getOrDefault(chapter.getChapterKey(), "not_started"));
+            return dto;
+        }).collect(Collectors.toList());
+
+        // 4. 构建章节树形结构
+        Map<Integer, ChapterProgressDTO> map = dtoList.stream()
+                .collect(Collectors.toMap(ChapterProgressDTO::getId, dto -> dto));
+        
+        List<ChapterProgressDTO> tree = new ArrayList<>();
+        for (ChapterProgressDTO dto : dtoList) {
+            if (dto.getParentId() == null || dto.getParentId() == 0) { // 根节点
+                tree.add(dto);
+            } else {
+                ChapterProgressDTO parentDto = map.get(dto.getParentId());
+                if (parentDto != null) {
+                    if (parentDto.getChildren() == null) {
+                        parentDto.setChildren(new ArrayList<>());
+                    }
+                    parentDto.getChildren().add(dto);
+                }
+            }
+        }
+
+        // 对子章节和顶层章节进行排序
+        tree.sort(Comparator.comparing(ChapterProgressDTO::getSortOrder));
+        tree.forEach(this::sortChildren);
+
+        return tree;
+    }
+
+    private void sortChildren(ChapterProgressDTO parent) {
+        if (parent.getChildren() != null && !parent.getChildren().isEmpty()) {
+            parent.getChildren().sort(Comparator.comparing(ChapterProgressDTO::getSortOrder));
+            parent.getChildren().forEach(this::sortChildren);
+        }
     }
 
     private String getMarkdownFilePath(Courses course) {

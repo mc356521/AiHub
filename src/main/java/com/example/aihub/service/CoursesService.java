@@ -4,6 +4,8 @@ import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Courses;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.aihub.dto.MyCourseResponse;
+import org.springframework.web.multipart.MultipartFile;
+import com.example.aihub.dto.ChapterProgressDTO;
 
 import java.util.List;
 
@@ -51,4 +53,6 @@ public interface CoursesService extends IService<Courses> {
     void updateCourseContent(Integer courseId, String content) throws Exception;
 
     List<MyCourseResponse> getStudentCourses(Integer studentId);
+
+    List<ChapterProgressDTO> getCourseChaptersWithProgress(Integer courseId, Integer userId);
 }

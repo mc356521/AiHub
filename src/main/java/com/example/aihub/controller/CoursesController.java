@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import com.example.aihub.dto.ChapterProgressDTO;
 
 /**
  * 课程管理控制器，提供课程的增删改查、解析及内容获取等功能。
@@ -197,5 +198,32 @@ public class CoursesController extends BaseController {
         coursesService.updateCourseContent(courseId, content);
         log.info("课程内容更新并重新解析成功，课程ID: {}", courseId);
         return Result.success(null, "课程内容更新成功");
+    }
+
+    /**
+     * 获取指定课程的章节列表及当前学生的学习进度。
+     * 此接口需要用户已认证。
+     *
+     * @param courseId 课程ID
+     * @return 包含章节进度树的Result响应
+     */
+    @Operation(summary = "获取课程章节及学习进度", description = "获取指定课程的章节树状列表，并附带当前学生的学习进度状态。")
+    @GetMapping("/{courseId}/progress")
+    @PreAuthorize("isAuthenticated()")
+    public Result<List<ChapterProgressDTO>> getCourseChapterProgress(@PathVariable Integer courseId) {
+        log.info("请求获取课程章节及学习进度，课程ID: {}", courseId);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            return Result.failed("用户未登录或认证信息不正确");
+        }
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            return Result.failed("无法找到当前登录用户的数据");
+        }
+
+        List<ChapterProgressDTO> chapterProgress = coursesService.getCourseChaptersWithProgress(courseId, currentUser.getId());
+        log.info("成功获取到课程 {} 的章节进度，共 {} 个顶级章节", courseId, chapterProgress.size());
+        return Result.success(chapterProgress, "获取课程进度成功");
     }
 } 
