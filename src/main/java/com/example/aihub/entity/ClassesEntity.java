@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.security.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -36,14 +37,20 @@ public class ClassesEntity {
     @Schema(description = "外键, 关联到courses表的课程ID (可选)")
     private Integer courseId;
 
+    @Schema(description = "外键, 关联到semesters表的学期ID")
+    private String semesterId;
+
     @Schema(description = "班级口令/邀请码, 用于学生加入班级")
     private String classCode;
 
+    @Schema(description = "班级状态 (pending: 未开课, active: 进行中, finished: 已结课, archived: 已归档)")
+    private String status;
+
     @Schema(description = "班级创建时间")
-    private Timestamp createTime;
+    private LocalDateTime  createTime;
 
     @Schema(description = "信息最后更新时间")
-    private Timestamp updateTime;
+    private LocalDateTime updateTime;
 
     @Schema(description = "逻辑删除标志")
     private Boolean deleted;

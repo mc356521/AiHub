@@ -18,6 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @email: weijikun1@icloud.com
  */
 @Mapper
-public interface ClassesMapper extends BaseMapper<ClassesRequest> {
+public interface ClassesMapper extends BaseMapper<ClassesEntity> {
 
 }
