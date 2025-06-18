@@ -13,8 +13,8 @@ http://localhost:8080/swagger-ui/index.html
     *   **后端框架**: Spring Boot 3.3.6
     *   **语言**: Java 17
     *   **构建工具**: Maven
-    *   **数据库**: MySQL
-    *   **持久层**: MyBatis-Plus 3.5.7
+    *   **数据库**: MySQL, MongoDB
+    *   **持久层**: MyBatis-Plus 3.5.7, Spring Data MongoDB
     *   **API文档**: SpringDoc 2.4.0
     *   **安全认证**: Spring Security, JWT (jjwt 0.11.5)
     *   **其他**: Spring Data Redis, Spring WebSocket
@@ -42,8 +42,9 @@ http://localhost:8080/swagger-ui/index.html
 *   `controller`: **控制器层**。负责接收HTTP请求，调用`Service`层，并返回统一的 `Result` 对象。**禁止包含业务逻辑**。
 *   `service`: **服务接口层**。定义核心业务接口。
 *   `service.impl`: **服务实现层**。处理具体业务逻辑，包括事务管理。
-*   `mapper`: **数据访问层**。使用 `@Mapper` 注解的MyBatis-Plus接口。
-*   `entity`: **实体类层**。与数据库表一一对应，必须继承`BaseEntity`。
+*   `mapper`: **(MySQL)数据访问层**。存放MyBatis-Plus的Mapper接口，专门用于操作MySQL数据库。
+*   `repository`: **(MongoDB)数据仓库层**。存放Spring Data MongoDB的Repository接口，专门用于操作MongoDB数据库。
+*   `entity`: **实体类层**。与数据库表或MongoDB集合对应。MySQL实体必须继承`BaseEntity`。
 *   `dto`: **数据传输对象层**。用于封装客户端请求和服务器响应的数据，如 `LoginRequest`, `RegisterRequest`。
 *   `common`: **通用模块**。存放`Result`, `ResultCode`, `IErrorCode`等全局通用类。
 *   `util`: **工具类层**。存放可复用的工具类，如`JwtUtil`。
@@ -78,12 +79,26 @@ http://localhost:8080/swagger-ui/index.html
         *   **若结果不为空**: 返回 `Result.success(list)`，`data`字段为包含数据的数组。
         *   **若结果为空**: 同样返回 `Result.success(emptyList)`，`data`字段为一个空数组 `[]`。**严禁**将"列表为空"视为一种失败。
 
-### 5. 持久层规范 (MySQL & MyBatis-Plus)
+### 5. 持久层规范
 
-*   **统一基类**: 所有实体类都必须继承 `BaseEntity`，以获得 `id`, `createTime`, `updateTime`, `deleted` 四个基础字段。
+项目同时使用MySQL和MongoDB作为数据存储。
+
+#### 5.1 MySQL & MyBatis-Plus
+
+*   **适用场景**: 结构化数据、需要事务一致性的核心业务数据（如用户信息、课程信息等）。
+*   **统一基类**: 所有与MySQL表对应的实体类都必须继承 `BaseEntity`，以获得 `id`, `createTime`, `updateTime`, `deleted` 四个基础字段。
 *   **自动填充**: `createTime`, `updateTime`, `deleted` 字段由 `MyBatisPlusMetaObjectHandler` 自动处理，业务代码无需手动设置。
 *   **逻辑删除**: 已全局配置逻辑删除。所有删除操作均为更新 `deleted` 标志，所有查询会自动过滤已删除数据。`AIhub.sql`中所有表均已适配此规范。
 *   **SQL规范**: `AIhub.sql` 中所有表字段使用下划线命名法 (`user_code`)，实体类中对应小驼峰命名法 (`userCode`)，由MyBatis-Plus自动映射。
+
+#### 5.2 MongoDB & Spring Data MongoDB
+
+*   **适用场景**: 非结构化或半结构化数据、日志记录、需要频繁写入且对事务要求不高的数据。
+*   **实体类**: MongoDB实体类（POJO）应使用 `@Document(collection = "...")` 注解指定其集合名称。
+*   **主键**: 使用 `@Id` 注解标记主键字段，通常为 `String` 类型。
+*   **数据仓库接口**:
+    *   所有MongoDB的数据访问接口应继承 `org.springframework.data.mongodb.repository.MongoRepository`。
+    *   这些接口必须存放在 `com.example.aihub.repository` 包下，以避免与MyBatis的Mapper扫描冲突。
 
 ### 6. 安全认证 (Spring Security & JWT)
 
