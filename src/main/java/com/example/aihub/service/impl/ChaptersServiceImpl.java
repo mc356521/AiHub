@@ -27,4 +27,11 @@ public class ChaptersServiceImpl extends ServiceImpl<ChaptersMapper, Chapters> i
     public void physicalDeleteByCourseId(Integer courseId) {
         baseMapper.physicalDeleteByCourseId(courseId);
     }
+    
+    @Override
+    public Chapters getChapterByKey(Integer courseId, String chapterKey) {
+        return this.getOne(new QueryWrapper<Chapters>()
+                .eq("course_id", courseId)
+                .eq("chapter_key", chapterKey));
+    }
 }

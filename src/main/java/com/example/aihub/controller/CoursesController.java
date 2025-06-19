@@ -3,9 +3,13 @@ package com.example.aihub.controller;
 import com.example.aihub.common.Result;
 import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.dto.MyCourseResponse;
+import com.example.aihub.dto.UpdateProgressRequest;
+import com.example.aihub.entity.Chapters;
 import com.example.aihub.entity.Courses;
 import com.example.aihub.entity.Users;
+import com.example.aihub.service.ChaptersService;
 import com.example.aihub.service.CoursesService;
+import com.example.aihub.service.LearningProgressService;
 import com.example.aihub.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import com.example.aihub.dto.ChapterProgressDTO;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * 课程管理控制器，提供课程的增删改查、解析及内容获取等功能。
@@ -36,6 +42,12 @@ public class CoursesController extends BaseController {
 
     @Autowired
     private UsersService usersService;
+    
+    @Autowired
+    private ChaptersService chaptersService;
+    
+    @Autowired
+    private LearningProgressService learningProgressService;
 
     /**
      * 创建一个新课程。
@@ -225,5 +237,58 @@ public class CoursesController extends BaseController {
         List<ChapterProgressDTO> chapterProgress = coursesService.getCourseChaptersWithProgress(courseId, currentUser.getId());
         log.info("成功获取到课程 {} 的章节进度，共 {} 个顶级章节", courseId, chapterProgress.size());
         return Result.success(chapterProgress, "获取课程进度成功");
+    }
+
+    /**
+     * 获取指定章节的详细内容。
+     * 此接口需要用户已认证。
+     * 访问时会自动更新用户的学习进度。
+     *
+     * @param courseId   课程ID
+     * @param chapterKey 章节标识键
+     * @return 包含章节详情的Result响应
+     */
+    @Operation(summary = "获取章节详情内容", description = "获取指定章节的详细内容，并记录用户访问进度")
+    @GetMapping("/{courseId}/chapters/{chapterKey}")
+    @PreAuthorize("isAuthenticated()")
+    public Result<Map<String, Object>> getChapterDetail(
+            @PathVariable Integer courseId,
+            @PathVariable String chapterKey) {
+        
+        log.info("请求获取章节详情，课程ID: {}, 章节KEY: {}", courseId, chapterKey);
+        
+        // 获取当前登录用户
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            return Result.failed("用户未登录或认证信息不正确");
+        }
+        String username = ((UserDetails) principal).getUsername();
+        Users currentUser = usersService.findByUsername(username);
+        if (currentUser == null) {
+            return Result.failed("无法找到当前登录用户的数据");
+        }
+        
+        // 获取章节详情
+        Chapters chapter = chaptersService.getChapterByKey(courseId, chapterKey);
+        if (chapter == null) {
+            log.warn("尝试获取不存在的章节，课程ID: {}, 章节KEY: {}", courseId, chapterKey);
+            return Result.failed("章节不存在");
+        }
+        
+        // 自动更新学习进度为"进行中"
+        UpdateProgressRequest progressRequest = new UpdateProgressRequest();
+        progressRequest.setCourseId(courseId);
+        progressRequest.setChapterKey(chapterKey);
+        progressRequest.setStatus("in_progress");
+        
+        learningProgressService.updateProgress(currentUser.getId(), progressRequest);
+        
+        // 构建响应数据
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("chapter", chapter);
+        
+        // 返回结果
+        log.info("成功获取章节详情，用户ID: {}, 章节: {}", currentUser.getId(), chapter.getTitle());
+        return Result.success(responseData, "获取章节详情成功");
     }
 } 

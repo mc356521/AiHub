@@ -26,4 +26,13 @@ public interface ChaptersService extends IService<Chapters> {
      * @param courseId 课程ID
      */
     void physicalDeleteByCourseId(Integer courseId);
+    
+    /**
+     * 根据课程ID和章节Key获取章节详情
+     * 
+     * @param courseId 课程ID
+     * @param chapterKey 章节标识键
+     * @return 章节详情
+     */
+    Chapters getChapterByKey(Integer courseId, String chapterKey);
 }
