@@ -11,7 +11,7 @@ public class UpdateProgressRequest {
     private Integer courseId;
 
     @Schema(description = "章节的唯一标识 (chapter_key)", required = true)
-    private String chapterId;
+    private String chapterKey;
 
     @Schema(description = "新的学习状态 (e.g., 'in_progress', 'completed')", required = true)
     private String status;

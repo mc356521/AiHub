@@ -20,8 +20,8 @@ public class LearningProgress {
     @Schema(description = "课程ID")
     private Integer courseId;
 
-    @Schema(description = "章节ID")
-    private String chapterId;
+    @Schema(description = "章节标识键")
+    private String chapterKey;
 
     @Schema(description = "学习状态")
     private String status;

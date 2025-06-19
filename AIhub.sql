@@ -343,7 +343,7 @@ CREATE TABLE `learning_progress` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '进度记录唯一ID',
   `user_id` INT NOT NULL COMMENT '学习者用户ID',
   `course_id` INT NOT NULL COMMENT '课程ID',
-  `chapter_id` VARCHAR(100) NOT NULL COMMENT '章节ID',
+  `chapter_key` VARCHAR(100) NOT NULL COMMENT '章节标识键',
   `status` ENUM('not_started', 'in_progress', 'completed') DEFAULT 'not_started' COMMENT '学习状态',
   `progress_percentage` DECIMAL(5,2) DEFAULT 0.00 COMMENT '学习进度百分比',
   `reading_time_seconds` INT DEFAULT 0 COMMENT '阅读时长（秒）',
@@ -354,8 +354,8 @@ CREATE TABLE `learning_progress` (
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_progress_user_chapter` (`user_id`, `course_id`, `chapter_id`),
-  INDEX `idx_progress_course` (`course_id`),
+  UNIQUE KEY `uk_progress_user_chapter` (`user_id`, `course_id`, `chapter_key`),
+  INDEX `idx_progress_course` (`chapter_key`),
   INDEX `idx_progress_status` (`status`),
   CONSTRAINT `fk_progress_user_id`
     FOREIGN KEY (`user_id`)

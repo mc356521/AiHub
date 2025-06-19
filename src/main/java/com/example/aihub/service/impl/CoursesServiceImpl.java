@@ -455,7 +455,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
                      .eq(LearningProgress::getUserId, userId);
         List<LearningProgress> progresses = learningProgressService.list(progressQuery);
         Map<String, String> chapterProgressMap = progresses.stream()
-                .collect(Collectors.toMap(LearningProgress::getChapterId, LearningProgress::getStatus));
+                .collect(Collectors.toMap(LearningProgress::getChapterKey, LearningProgress::getStatus));
 
         // 3. 将章节转换为DTO并填充进度
         List<ChapterProgressDTO> dtoList = allChapters.stream().map(chapter -> {

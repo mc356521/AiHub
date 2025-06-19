@@ -20,7 +20,7 @@ public class LearningProgressServiceImpl extends ServiceImpl<LearningProgressMap
         LambdaQueryWrapper<LearningProgress> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(LearningProgress::getUserId, userId)
                     .eq(LearningProgress::getCourseId, request.getCourseId())
-                    .eq(LearningProgress::getChapterId, request.getChapterId());
+                    .eq(LearningProgress::getChapterKey, request.getChapterKey());
         
         LearningProgress progress = getOne(queryWrapper);
 
@@ -29,7 +29,7 @@ public class LearningProgressServiceImpl extends ServiceImpl<LearningProgressMap
             progress = new LearningProgress();
             progress.setUserId(userId);
             progress.setCourseId(request.getCourseId());
-            progress.setChapterId(request.getChapterId());
+            progress.setChapterKey(request.getChapterKey());
             progress.setFirstVisitTime(Timestamp.from(Instant.now()));
         }
 

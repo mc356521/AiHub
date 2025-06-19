@@ -46,7 +46,7 @@ public class LearningProgressController extends BaseController {
         }
 
         learningProgressService.updateProgress(currentUser.getId(), request);
-        log.info("用户 {} 对章节 {} 的进度更新成功", currentUser.getUsername(), request.getChapterId());
+        log.info("用户 {} 对章节 {} 的进度更新成功", currentUser.getUsername(), request.getChapterKey());
         return Result.success(null, "进度更新成功");
     }
 } 
