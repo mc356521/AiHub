@@ -102,11 +102,10 @@ public class DiscussionService {
 
 
     /**
-     * 根据课程 ID 获取该课程下的所有讨论
-     *
      * @param courseId 课程 ID
      * @return 讨论列表
      */
+    @Schema(description = "根据课程 ID 获取该课程下的所有讨论")
     public Result<List<Discussion>> getDiscussionsByCourseId(Integer courseId) {
         try {
             List<Discussion> discussions = repository.findByCoursesId(courseId);
@@ -114,6 +113,33 @@ public class DiscussionService {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failed("获取讨论失败：" + e.getMessage());
+        }
+    }
+
+
+    @Schema(description = "根据班级id获取班级下所有讨论内容")
+    public Result<List<Discussion>> getDiscussionsByClassesIdAll(Integer classesId) {
+        try {
+            val discussionByClassesId = repository.findDiscussionByClassesId(classesId);
+            return Result.success(discussionByClassesId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failed("获取班级讨论失败: " + e.getMessage());
+        }
+    }
+
+    @Schema(description = "通过课程id获取课程下所有讨论内容")
+    public Result<List<Discussion>> getDiscussionsByCourseIdAll(Integer courseId) {
+        try {
+            val discussionByCoursesId = repository.findDiscussionByCoursesId(courseId);
+            if (discussionByCoursesId == null) {
+                return Result.failed("获取讨论失败!");
+            } else {
+                return Result.success(discussionByCoursesId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failed("获取讨论内容失败: " + e.getMessage());
         }
     }
 }

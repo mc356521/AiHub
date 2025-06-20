@@ -68,4 +68,26 @@ public class DiscussionController {
             return discussionService.getDiscussionsByCourseId(courseId);
         }
     }
+
+
+    @GetMapping("/findByClassesId")
+    @Operation(summary = "通过班级id获取讨论列表")
+    public Result<List<Discussion>> getDiscussionsByClassesId(@RequestParam("classesId") Integer classesId) {
+        if (classesId == null) {
+            return Result.failed("班级id不能为空!");
+        } else {
+            return discussionService.getDiscussionsByClassesIdAll(classesId);
+        }
+    }
+
+    @GetMapping("/findByCourceId")
+    @Operation(summary = "通过课程id获取课程下所有讨论内容")
+    public Result<List<Discussion>> getDiscussionsByCourceId(@RequestParam("courseId") Integer courseId) {
+        if (courseId == null) {
+            return Result.failed("课程id不能为空!");
+        } else {
+            return discussionService.getDiscussionsByCourseIdAll(courseId);
+        }
+    }
+
 }

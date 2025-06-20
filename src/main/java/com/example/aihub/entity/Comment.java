@@ -15,7 +15,7 @@ import java.util.List;
 @Schema(description = "评论内容实体类")
 public class Comment {
 
-    @Schema(description = "评论用户")
+    @Schema(description = "评论用户id")
     private String commentAuthorId;
 
     @Schema(description = "评论内容")

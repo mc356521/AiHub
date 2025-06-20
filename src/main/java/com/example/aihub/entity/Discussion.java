@@ -17,14 +17,17 @@ import java.util.List;
  * @createTime: 2025/6/19 20:24
  * @email: weijikun1@icloud.com
  */
-@Data // Lombok 注解，自动生成 getter、setter、toString、equals、hashCode 等方法
+@Data
 @Schema(description = "班级互动讨论实体类")
-@Document(collection = "discussions") // 指定 MongoDB 中的集合名称为 discussions
+@Document(collection = "discussions")
 public class Discussion {
 
     @Id
     @Schema(description = "MongoDB 中的主键字段，对应 _id")
     private String id;
+
+    @Schema(description = "班级id", required = true)
+    private Integer classesId;
 
     @Schema(description = "讨论课程id", required = true)
     private Integer coursesId;
@@ -41,7 +44,7 @@ public class Discussion {
     /**
      * 需要先提交文件获取到的文件路径填充
      * 示例：
-     * ["https://img-server.com/image1.jpg", "https://img-server.com/image2.png"]
+     * ["<a href="https://img-server.com/image1.jpg">...</a>", "<a href="https://img-server.com/image2.png">...</a>"]
      */
     @Schema(description = "附带的图片 URL 列表，支持上传多个图片")
     private List<String> images;
