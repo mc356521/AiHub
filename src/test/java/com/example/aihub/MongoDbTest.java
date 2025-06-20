@@ -1,7 +1,5 @@
 package com.example.aihub;
 
-import com.example.aihub.entity.MongoTestEntity;
-import com.example.aihub.repository.MongoTestRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

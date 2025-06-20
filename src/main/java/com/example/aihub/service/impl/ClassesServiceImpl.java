@@ -95,10 +95,6 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
         return classesMapper.selectList(wrapper);
     }
 
-    @Override
-    public boolean deleteClasses(Integer classesId) {
-        return false;
-    }
 
     @Override
     public void joinClassByCode(Integer studentId, String classCode) {
@@ -110,7 +106,6 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
         if (targetClass == null) {
             throw new RuntimeException("无效的班级口令");
         }
-
         // 2. 检查班级状态
         if (!("pending".equals(targetClass.getStatus()) || "active".equals(targetClass.getStatus()))) {
             throw new RuntimeException("该班级已结束或已归档，无法加入");
