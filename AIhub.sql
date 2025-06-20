@@ -299,10 +299,6 @@ CREATE TABLE `learning_tasks` (
   CONSTRAINT `fk_task_related_chapter_id`
     FOREIGN KEY (`related_chapter_id`)
     REFERENCES `chapters` (`id`)
-    ON DELETE SET NULL,
-  CONSTRAINT `fk_task_related_resource_id`
-    FOREIGN KEY (`related_resource_id`)
-    REFERENCES `resources` (`id`)
     ON DELETE SET NULL
 )
 ENGINE = InnoDB
@@ -322,7 +318,8 @@ CREATE TABLE `task_submissions` (
   `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_submission_student_task` (`student_id`, `task_id`),
+  UNIQUE KEY `uk_submiss
+-- ----ion_student_task` (`student_id`, `task_id`),
   INDEX `idx_submission_task_id` (`task_id`),
   CONSTRAINT `fk_submission_task_id`
     FOREIGN KEY (`task_id`)
@@ -335,8 +332,7 @@ CREATE TABLE `task_submissions` (
 )
 ENGINE = InnoDB
 COMMENT = '记录学生对学习任务的完成情况';
-
--- -----------------------------------------------------
+-------------------------------------------------
 -- 功能扩展表: 学习进度 (learning_progress)
 -- -----------------------------------------------------
 CREATE TABLE `learning_progress` (
