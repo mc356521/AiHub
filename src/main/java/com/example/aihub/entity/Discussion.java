@@ -29,6 +29,9 @@ public class Discussion {
     @Schema(description = "讨论发布者id", required = true)
     private Integer publisherId;
 
+    @Schema(description = "发布者名称")
+    private String publisherName;
+
     @Schema(description = "班级id", required = true)
     private Integer classesId;
 

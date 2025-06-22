@@ -81,10 +81,13 @@ public class DiscussionService {
         val courseById = coursesService.getCourseById(discussions.get(0).getCoursesId());
         // 查询班级信息
         val classById = classesService.findClassById(discussions.get(0).getClassesId());
+        // 查询发布者名称
+        val publisherModel = usersService.findById(Long.valueOf(discussions.get(0).getPublisherId()));
         // 填充信息
         for (Discussion discussion : discussions) {
             discussion.setCoursesName(courseById.getTitle());
             discussion.setClassesName(classById.getName());
+            discussion.setPublisherName(publisherModel.getFullName());
             for (Comment comment : discussion.getComments()) {
                 // 查询评论者信息
                 val users = usersService.findById(Long.valueOf(comment.getCommentAuthorId()));
@@ -158,10 +161,13 @@ public class DiscussionService {
             val courseById = coursesService.getCourseById(discussions.get(0).getCoursesId());
             // 查询班级信息
             val classById = classesService.findClassById(discussions.get(0).getClassesId());
+            // 查询发布者名称
+            val publisherModel = usersService.findById(Long.valueOf(discussions.get(0).getPublisherId()));
             // 填充信息
             for (Discussion discussion : discussions) {
                 discussion.setCoursesName(courseById.getTitle());
                 discussion.setClassesName(classById.getName());
+                discussion.setPublisherName(publisherModel.getFullName());
                 for (Comment comment : discussion.getComments()) {
                     // 查询评论者信息
                     val users = usersService.findById(Long.valueOf(comment.getCommentAuthorId()));
@@ -184,10 +190,13 @@ public class DiscussionService {
             val courseById = coursesService.getCourseById(discussionByClassesId.get(0).getCoursesId());
             // 查询班级信息
             val classById = classesService.findClassById(discussionByClassesId.get(0).getClassesId());
+            // 查询发布者名称
+            val publisherModel = usersService.findById(Long.valueOf(discussionByClassesId.get(0).getPublisherId()));
             // 填充信息
             for (Discussion discussion : discussionByClassesId) {
                 discussion.setCoursesName(courseById.getTitle());
                 discussion.setClassesName(classById.getName());
+                discussion.setPublisherName(publisherModel.getFullName());
                 for (Comment comment : discussion.getComments()) {
                     // 查询评论者信息
                     val users = usersService.findById(Long.valueOf(comment.getCommentAuthorId()));
@@ -209,10 +218,13 @@ public class DiscussionService {
             val courseById = coursesService.getCourseById(discussionByCoursesId.get(0).getCoursesId());
             // 查询班级信息
             val classById = classesService.findClassById(discussionByCoursesId.get(0).getClassesId());
+            // 查询发布者名称
+            val publisherModel = usersService.findById(Long.valueOf(discussionByCoursesId.get(0).getPublisherId()));
             // 填充信息
             for (Discussion discussion : discussionByCoursesId) {
                 discussion.setCoursesName(courseById.getTitle());
                 discussion.setClassesName(classById.getName());
+                discussion.setPublisherName(publisherModel.getFullName());
                 for (Comment comment : discussion.getComments()) {
                     // 查询评论者信息
                     val users = usersService.findById(Long.valueOf(comment.getCommentAuthorId()));
