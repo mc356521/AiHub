@@ -11,6 +11,7 @@ import com.example.aihub.service.ClassesService;
 import com.example.aihub.service.CoursesService;
 import com.example.aihub.service.UsersService;
 import com.example.aihub.util.BasicUtil;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -87,6 +88,8 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
         return classesMapper.updateById(entity) > 0;
     }
 
+
+
     @Override
     public List<ClassesEntity> findClassesByTeacherAndStatus(Long teacherId, String status) {
         QueryWrapper<ClassesEntity> wrapper = new QueryWrapper<>();
@@ -129,5 +132,12 @@ public class ClassesServiceImpl extends ServiceImpl<ClassesMapper, ClassesEntity
         newMember.setStudentId(studentId);
         newMember.setClassId(targetClass.getId());
         classMembersMapper.insert(newMember);
+    }
+
+
+    @Schema(description = "根据班级id查询班级信息")
+    @Override
+    public ClassesEntity findClassById(Integer classId) {
+        return classesMapper.selectById(classId);
     }
 }

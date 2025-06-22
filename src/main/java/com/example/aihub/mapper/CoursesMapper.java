@@ -19,5 +19,4 @@ import java.util.List;
 public interface CoursesMapper extends BaseMapper<Courses> {
 
     List<MyCourseResponse> findCoursesByStudentId(@Param("studentId") Integer studentId);
-
 }

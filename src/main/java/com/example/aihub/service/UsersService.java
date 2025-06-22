@@ -30,4 +30,10 @@ public interface UsersService extends IService<Users> {
      * @throws RuntimeException 如果用户名或邮箱已存在
      */
     Users register(RegisterRequest registerRequest);
+
+
+    /**
+     * 根据用户id查询用户信息
+     */
+    Users findById(Long id);
 }

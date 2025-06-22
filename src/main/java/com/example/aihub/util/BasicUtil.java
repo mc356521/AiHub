@@ -24,7 +24,8 @@ public class BasicUtil {
      * @return 随机班级口令字符串
      */
     public static String getRandomCommand() {
-        int length = 6 + random.nextInt(3); // 6~8位
+        // 6~8位
+        int length = 6 + random.nextInt(3);
         StringBuilder command = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             command.append(CHAR_SET.charAt(random.nextInt(CHAR_SET.length())));

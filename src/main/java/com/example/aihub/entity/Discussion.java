@@ -26,11 +26,20 @@ public class Discussion {
     @Schema(description = "MongoDB 中的主键字段，对应 _id")
     private String id;
 
+    @Schema(description = "讨论发布者id", required = true)
+    private Integer publisherId;
+
     @Schema(description = "班级id", required = true)
     private Integer classesId;
 
+    @Schema(description = "班级名称")
+    private String classesName;
+
     @Schema(description = "讨论课程id", required = true)
     private Integer coursesId;
+
+    @Schema(description = "课程名称")
+    private String coursesName;
 
     @Schema(description = "讨论标题，例如“期末复习资料分享”")
     private String title;

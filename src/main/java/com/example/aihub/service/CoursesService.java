@@ -4,6 +4,7 @@ import com.example.aihub.dto.CreateCourseRequest;
 import com.example.aihub.entity.Courses;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.aihub.dto.MyCourseResponse;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.aihub.dto.ChapterProgressDTO;
 
@@ -55,4 +56,7 @@ public interface CoursesService extends IService<Courses> {
     List<MyCourseResponse> getStudentCourses(Integer studentId);
 
     List<ChapterProgressDTO> getCourseChaptersWithProgress(Integer courseId, Integer userId);
+
+    @Schema(description = "根基课程id获取课程信息")
+    Courses getCourseById(Integer courseId);
 }

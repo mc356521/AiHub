@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.aihub.dto.ClassesRequest;
 import com.example.aihub.entity.Chapters;
 import com.example.aihub.entity.ClassesEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,4 +44,8 @@ public interface ClassesService extends IService<ClassesEntity> {
      * 更新/修改班级信息
      */
     boolean updateClasses(ClassesRequest classesRequest);
+
+
+    @Schema(description = "根据班级id查询班级信息")
+    ClassesEntity findClassById(Integer classId);
 }
