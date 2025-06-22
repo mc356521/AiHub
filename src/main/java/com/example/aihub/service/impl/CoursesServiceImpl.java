@@ -19,6 +19,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -82,6 +83,9 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
 
     @Value("${file.upload-dir}")
     private String uploadDir;
+
+    @Autowired
+    private CoursesMapper coursesMapper;
 
     @Override
     @Transactional
@@ -488,6 +492,12 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, Courses> impl
         tree.forEach(this::sortChildren);
 
         return tree;
+    }
+
+    @Schema(description = "根据课程id查询课程信息")
+    @Override
+    public Courses getCourseById(Integer courseId) {
+        return coursesMapper.selectById(courseId);
     }
 
     private void sortChildren(ChapterProgressDTO parent) {

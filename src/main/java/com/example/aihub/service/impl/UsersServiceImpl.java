@@ -57,4 +57,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         save(user);
         return user;
     }
+
+    @Override
+    public Users findById(Long id) {
+        return lambdaQuery().eq(Users::getId, id).one();
+    }
 }

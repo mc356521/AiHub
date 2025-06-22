@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @created: ii_kun
+ * @author ikun
  * @createTime: 2025/6/19 20:29
  * @email: weijikun1@icloud.com
  */
@@ -17,6 +17,9 @@ public class Comment {
 
     @Schema(description = "评论用户id")
     private String commentAuthorId;
+
+    @Schema(description = "用户名称")
+    private String commentAuthorName;
 
     @Schema(description = "评论内容")
     private String commentContent;
