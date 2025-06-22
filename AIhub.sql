@@ -126,7 +126,6 @@ CREATE TABLE `semesters` (
 )
 ENGINE = InnoDB
 COMMENT = '统一管理所有学期信息';
-ALTER TABLE semesters INSERT `deleted` TINYINT(1) DEFAULT 0;
 
 CREATE TABLE `classes` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '班级唯一ID',
@@ -185,9 +184,10 @@ ENGINE = InnoDB;
 CREATE TABLE `resources` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '资源唯一ID',
   `title` VARCHAR(255) NOT NULL COMMENT '资源标题',
-  `type` ENUM('pdf', 'video', 'docx', 'pptx', 'other') NOT NULL COMMENT '资源文件类型',
+  `file_type` VARCHAR(100) COMMENT '类型',
   `file_path` VARCHAR(255) NOT NULL COMMENT '文件在服务器上的存储路径',
   `file_size` INT NULL COMMENT '文件大小 (Bytes)',
+  `duration` INT NULL COMMENT '视频时长 (秒)',
   `uploader_id` INT NOT NULL COMMENT '外键, 关联到users表的上传者ID',
   `course_id` INT NULL COMMENT '外键, 关联到courses表的课程ID (可选)',
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '资源上传时间',
@@ -199,7 +199,7 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resources_uploader_id`
     FOREIGN KEY (`uploader_id`)
     REFERENCES `users` (`id`)
-    ON DELETE NO ACTION,
+    ON DELETE CASCADE,  -- 修改为CASCADE
   CONSTRAINT `fk_resources_course_id`
     FOREIGN KEY (`course_id`)
     REFERENCES `courses` (`id`)
@@ -207,7 +207,6 @@ CREATE TABLE `resources` (
 )
 ENGINE = InnoDB
 COMMENT = '存储上传的教学资源，如课件、视频、文档等';
-
 
 -- -----------------------------------------------------
 -- 功能扩展表: 章节练习 (chapter_exercises)
@@ -318,8 +317,7 @@ CREATE TABLE `task_submissions` (
   `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_submiss
--- ----ion_student_task` (`student_id`, `task_id`),
+  UNIQUE KEY `uk_submission_student_task` (`student_id`, `task_id`),
   INDEX `idx_submission_task_id` (`task_id`),
   CONSTRAINT `fk_submission_task_id`
     FOREIGN KEY (`task_id`)
@@ -332,7 +330,8 @@ CREATE TABLE `task_submissions` (
 )
 ENGINE = InnoDB
 COMMENT = '记录学生对学习任务的完成情况';
--------------------------------------------------
+
+-- -----------------------------------------------------
 -- 功能扩展表: 学习进度 (learning_progress)
 -- -----------------------------------------------------
 CREATE TABLE `learning_progress` (
